@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://justindhinakarmoorthy.github.io/sitemap.xml
