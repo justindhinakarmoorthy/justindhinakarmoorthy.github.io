@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Tamil Nadu 2026 Election Results",
+    "description": "Reproducible pipeline that extracts results for all 234 Tamil Nadu assembly constituencies from the Election Commission of India, validates them, and builds a queryable warehouse.",
+    "tech": "dbt · DuckDB",
+    "language": "Python",
+    "links": {
+      "github": "https://github.com/justindhinakarmoorthy/tamilnadu_assembly_election_results2026"
+    },
+    "featured": true,
+    "order": 1
+  },
+  {
+    "name": "Form 20 Extraction: Dharapuram (AC101)",
+    "description": "Staged pipeline that turns the Form 20 PDF into booth-level votes for every candidate, with QA checks at each step.",
+    "tech": "pdfplumber · pandas",
+    "language": "Python",
+    "links": {
+      "github": "https://github.com/justindhinakarmoorthy/form20_ac101_extraction"
+    },
+    "featured": true,
+    "order": 2
+  },
+  {
+    "name": "Bike-Share Ride Analysis",
+    "description": "Google Data Analytics capstone: merged 12 months of ride data, cleaned it in R, and analysed it in Tableau.",
+    "tech": "Tableau",
+    "language": "R",
+    "links": {
+      "github": "https://github.com/justindhinakarmoorthy/cyclistanalysis"
+    },
+    "featured": true,
+    "order": 3
+  },
+  {
+    "name": "Zillow Data Cleaning",
+    "description": "Data cleaning process for a Zillow housing dataset in R.",
+    "tech": "",
+    "language": "R",
+    "links": {
+      "github": "https://github.com/justindhinakarmoorthy/zillowdatacleaning"
+    },
+    "featured": true,
+    "order": 4
+  }
+]
