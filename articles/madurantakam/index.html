@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Madurantakam: not who wins, but where the votes move</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F5;--ink:#1D2230;--ink-2:#454B5A;--muted:#7C8190;--rule:#D9DCD6;
+  --accent:#5B3A9E;--zone:rgba(91,58,158,.08);
+  --aiadmk:#1B8A3A;--tvk:#B87F00;--dmk:#C8233A;--others:#A3A7A0;--dot-mute:#C9CCC5;
+  --box:#FFFFFF;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#14161B;--ink:#E9EAE6;--ink-2:#BCC0C8;--muted:#8A8F9B;--rule:#2C3039;
+    --accent:#A88BE8;--zone:rgba(168,139,232,.12);
+    --aiadmk:#3DB365;--tvk:#E8B21E;--dmk:#EF5468;--others:#6F737C;--dot-mute:#393D46;
+    --box:#1C1F26;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14161B;--ink:#E9EAE6;--ink-2:#BCC0C8;--muted:#8A8F9B;--rule:#2C3039;
+  --accent:#A88BE8;--zone:rgba(168,139,232,.12);
+  --aiadmk:#3DB365;--tvk:#E8B21E;--dmk:#EF5468;--others:#6F737C;--dot-mute:#393D46;
+  --box:#1C1F26;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.prose{max-width:34em}
+.hero{padding:72px 0 24px}
+.hero h1{font-family:var(--sans);font-stretch:118%;font-weight:800;font-size:clamp(34px,6vw,64px);line-height:1.02;letter-spacing:-.015em;margin:0 0 20px;max-width:14em}
+.dek{font-family:var(--serif);font-style:italic;font-size:21px;color:var(--ink-2);margin:0 0 20px;max-width:32em}
+.byline{font-family:var(--sans);font-size:14px;color:var(--muted);margin:0;padding-bottom:28px;border-bottom:1px solid var(--rule)}
+.hero h1{margin-bottom:24px}
+.lede{padding:28px 0 40px}
+.lede p{margin:0 0 1.1em}
+h2{font-family:var(--sans);font-stretch:110%;font-weight:750;font-size:26px;line-height:1.15;margin:0 0 12px;letter-spacing:-.005em}
+h3{font-family:var(--sans);font-weight:700;font-size:20px;line-height:1.25;margin:0 0 8px}
+
+.scrolly{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;position:relative}
+.graphic{grid-column:2;grid-row:1;align-self:start;position:sticky;top:env(safe-area-inset-top,0px);height:calc(100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(100svh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;justify-content:center;padding:28px 0}
+.steps{grid-column:1;grid-row:1;padding:12vh 0 40vh;position:relative;z-index:2}
+.step{min-height:80vh;display:flex;align-items:center}
+.step-inner{border-left:3px solid transparent;padding:4px 0 4px 20px;color:var(--muted);transition:color .3s,border-color .3s;border-radius:0}
+.step.is-active .step-inner{color:var(--ink);border-left-color:var(--accent)}
+.step p{margin:0 0 .9em}
+.step p:last-child{margin-bottom:0}
+.chart-head{font-family:var(--sans);margin:0 0 6px;min-height:44px}
+.chart-title{font-weight:700;font-size:17px;margin:0}
+.chart-note{font-size:13.5px;color:var(--muted);margin:2px 0 0}
+.chart-box{position:relative;flex:1;min-height:0}
+#viz{display:block;width:100%;height:100%;overflow:visible}
+#viz text{font-family:var(--sans);font-variant-numeric:tabular-nums}
+.tip{position:absolute;pointer-events:none;background:var(--box);border:1px solid var(--rule);color:var(--ink);font-family:var(--sans);font-size:13px;line-height:1.35;padding:6px 9px;border-radius:4px;opacity:0;transition:opacity .15s;white-space:nowrap;z-index:5}
+
+.try label{display:block;font-family:var(--sans);font-size:14px;font-weight:600;margin:4px 0 6px}
+.try input[type=range]{width:100%;accent-color:var(--accent)}
+.try output{display:block;font-family:var(--sans);font-size:14.5px;line-height:1.45;margin-top:8px;font-variant-numeric:tabular-nums}
+
+.claims{padding:40px 0 16px;border-top:1px solid var(--rule);margin-top:24px}
+.claims>p{margin:0 0 28px}
+.claim{border-left:3px solid var(--c);border-radius:0;padding:2px 0 2px 20px;margin:0 0 30px}
+.claims h2{margin-bottom:24px}
+.claim .party{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--c);margin:0 0 2px}
+.claim p{margin:0}
+.next{padding:8px 0 24px}
+.next p{margin:0}
+footer{border-top:1px solid var(--rule);padding:24px 0 56px;font-family:var(--sans);font-size:14px;line-height:1.55;color:var(--muted)}
+footer p{margin:0 0 .7em;max-width:46em}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:860px){
+  body{font-size:18px}
+  .wrap{padding-left:max(22px, env(safe-area-inset-left, 0px));padding-right:max(22px, env(safe-area-inset-right, 0px))}
+  .hero{padding-top:44px}
+  .scrolly{display:block}
+  .graphic{position:sticky;height:58vh;height:58svh;padding:12px 0 8px;background:var(--paper);z-index:1}
+  .steps{padding:0 0 30vh;margin-top:0}
+  .step{min-height:125vh;align-items:flex-end;padding-bottom:6vh}
+  .step:first-child{min-height:70vh}
+  .step-inner{background:var(--box);border:1px solid var(--rule);border-left:3px solid var(--rule);padding:16px 18px;border-radius:0;color:var(--ink)}
+  .step.is-active .step-inner{border-left-color:var(--accent)}
+  .chart-head{min-height:0}
+  .chart-title{font-size:15px}
+  .chart-note{font-size:12.5px}
+}
+@media (prefers-reduced-motion:reduce){.step-inner,.tip{transition:none}}
+</style>
+</head>
+<body>
+<header class="hero wrap">
+  <h1>Madurantakam: Not Who Wins, but Where the Votes Move</h1>
+  <p class="byline">Part 1 of 2, by <a href="https://x.com/justinmoorthy">@justinmoorthy</a></p>
+</header>
+
+<section class="lede wrap">
+  <div class="prose">
+    <p>ADMK won this seat with just 34.9% of the votes. It is just 3.4 points ahead of TVK. The resignation of the ADMK MLA who is also the contestant for TVK has thrown unique challenges for all three political parties in this race. Booth-level data shows how fragile the win was: if just 5% of ADMK voters follow the now TVK candidate, TVK wins. It's just 1 in 20 votes polled for ADMK in April 2026.</p>
+    <p>This is not a prediction. We do not have statistically sound pre-poll surveys, and even if we had such a thing, there are chances that it can go the other way. Whoever wins on October 9th, the more interesting question would be where the votes move: which booths held, which booths shifted, and towards whom? A party can win and still lose ground, or lose and still grow. This article sets up what to look for, so the results tell us something beyond who won the by-election in Madurantakam.</p>
+  </div>
+</section>
+
+<section class="scrolly wrap" aria-label="Scrolling analysis with charts">
+  <div class="graphic" aria-live="polite">
+    <div class="chart-head">
+      <p class="chart-title" id="chartTitle">Vote share, Madurantakam, April 2026</p>
+      <p class="chart-note" id="chartNote">All valid votes polled</p>
+    </div>
+    <div class="chart-box" id="chartBox">
+      <svg id="viz" role="img" aria-labelledby="chartTitle chartNote"></svg>
+      <div class="tip" id="tip"></div>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step" data-step="bars"><div class="step-inner">
+      <h2>It was never a landslide</h2>
+      <p>Three parties finished within 5 points of each other: ADMK 34.9%, TVK 31.5% and DMK 30.1%. About two in three voters chose someone other than the winner.</p>
+    </div></div>
+
+    <div class="step" data-step="close"><div class="step-inner">
+      <p>Out of 285 booths, 110 booths were decided by less than a 5% vote margin.</p>
+    </div></div>
+
+    <div class="step" data-step="aiadmk"><div class="step-inner">
+      <h2>How ADMK won</h2>
+      <p>ADMK won 130 booths and it won them big. Only 1 in 5 booths were close calls, compared to half for TVK and DMK. A typical booth win was around 10%, which is double what TVK and DMK managed.</p>
+    </div></div>
+
+    <div class="step" data-step="strong"><div class="step-inner">
+      <p>It also has 6 stronghold booths where it won by 37%-42%.</p>
+      <p>This chart explains the puzzle: it was big wins but a slim overall lead. ADMK's vote is concentrated in clusters of booths where it dominates, and it's weak elsewhere. This is what makes this seat worth the watch. If it holds those clusters, then the base is real, and if they break, then we learn who those votes really belonged to.</p>
+    </div></div>
+
+    <div class="step" data-step="h2h"><div class="step-inner">
+      <h2>The Race for the 2nd Spot</h2>
+      <p>TVK edged past DMK by just 1.4 points overall. In a head-to-head count, TVK outpolled DMK in 158 of 285 booths, regardless of who won the booth. Neither party had a clear edge anywhere.</p>
+    </div></div>
+
+    <div class="step" data-step="whatif"><div class="step-inner">
+      <h2>The Low bar for TVK</h2>
+      <p>We can't predict how many voters will switch parties and follow their MLA, but we can test how many it would take. Holding DMK's and other parties' votes constant, the chart moves a growing share of ADMK's votes to TVK.</p>
+    </div></div>
+
+    <div class="step" data-step="cross"><div class="step-inner">
+      <p>The bar for TVK is remarkably low. Every ADMK voter who follows the former MLA takes a vote away from ADMK and adds one to TVK, so the gap closes twice as fast. TVK needs just 5% of ADMK's voters to overturn the April result, and that's before counting the advantage ruling parties usually enjoy in by-elections.</p>
+    </div></div>
+
+    <div class="step" data-step="try"><div class="step-inner try">
+      <label for="shift">Share of ADMK voters who switch to TVK: <span id="shiftVal">5%</span></label>
+      <input type="range" id="shift" min="0" max="30" step="1" value="5">
+      <output id="readout" for="shift"></output>
+    </div></div>
+
+    <div class="step" data-step="margin"><div class="step-inner">
+      <p>That's exactly why a TVK win, by itself, proves little. The real signal is the margin. A narrow TVK win would mean the defection barely moved voters. A large win with a substantial vote loss from ADMK, especially where they were strong, would mean the candidate really did help TVK gain more votes, and if a large win results from pulling in votes from all corners, then it means TVK as a party itself is growing. And if TVK falls short despite such a low bar, that would be the biggest story of all.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="claims wrap">
+  <div class="prose">
+    <h2>Three Claims and how part 2 will test them</h2>
+    <div class="claim" style="--c:var(--aiadmk)">
+      <h3>Claim 1: AIADMK still has its own base, despite splits and defections.</h3>
+      <p>Test: win or lose, does AIADMK keep its 6 stronghold booths and stay above 30% overall? If it does, the base belongs to the party. If the strongholds fall, those votes belonged to the candidate or the reliable party voters are gradually moving towards TVK. This is a test for the party leadership.</p>
+    </div>
+    <div class="claim" style="--c:var(--tvk)">
+      <h3>Claim 2: TVK's vote comes from the Vijay brand, not local candidates.</h3>
+      <p>Test: booth data can show where votes moved, not why, so the test looks at where TVK gains. In booths where DMK was strong and AIADMK weak in April, the former MLA had few AIADMK voters to bring. If TVK gains ground there too, it points to a pull toward TVK beyond the defection. If TVK's gains are confined to AIADMK's old strongholds, with AIADMK dropping by a similar amount, the votes simply followed the defection, whether voters were drawn by her or by Vijay.</p>
+    </div>
+    <div class="claim" style="--c:var(--dmk)">
+      <h3>Claim 3: DMK's vote depends on its allies.</h3>
+      <p>Test: Congress, VCK, MDMK and IUML, all recent DMK partners, are backing TVK in this by-election. If DMK holds near its April share of 30.1%, the claim is weaker than it sounds. If DMK drops, the booths where it falls will show which ally votes mattered.</p>
+    </div>
+  </div>
+</section>
+
+<section class="next wrap">
+  <div class="prose">
+    <h2>What's next</h2>
+    <p>Part 2 will compare the October 9 results booth by booth against these tests, and show which narratives held up and which didn't.</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p>Source: ECI Form 20 booth-level results, TN Assembly Election 2026. The what-if is a scenario, not a forecast: it moves a fixed share of ADMK votes to TVK and holds all other votes unchanged.</p>
+  <p><a href="https://x.com/justinmoorthy">@justinmoorthy</a></p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+(function(){
+const RAW = [[1,249,184,295,31],[2,243,133,179,24],[3,291,275,282,60],[4,208,347,391,31],[5,189,166,209,15],[6,110,156,193,21],[7,197,295,354,38],[8,283,179,181,33],[9,212,99,83,21],[10,323,250,374,47],[11,379,243,267,31],[12,211,215,229,12],[13,248,137,200,34],[14,148,190,209,19],[15,229,159,182,26],[16,145,183,192,21],[17,177,158,187,32],[18,197,222,214,31],[19,139,233,223,20],[20,244,252,378,49],[21,288,293,345,31],[22,291,114,195,20],[23,221,153,279,21],[24,351,308,320,29],[25,201,256,267,33],[26,189,280,211,30],[27,403,271,255,61],[28,260,392,319,60],[29,267,184,171,22],[30,185,235,254,59],[31,224,90,196,16],[32,285,299,330,59],[33,310,257,473,41],[34,266,146,337,35],[35,242,107,317,23],[36,406,246,324,31],[37,435,175,272,34],[38,279,308,252,27],[39,228,305,380,28],[40,220,347,258,39],[41,161,179,195,19],[42,145,241,233,13],[43,268,327,312,51],[44,425,180,225,26],[45,337,186,274,34],[46,197,180,117,21],[47,208,102,101,18],[48,223,163,152,36],[49,268,212,224,16],[50,334,296,265,24],[51,214,273,198,23],[52,157,170,231,25],[53,429,160,199,19],[54,259,203,287,44],[55,281,266,174,21],[56,277,194,155,4],[57,311,261,335,17],[58,176,129,152,13],[59,180,189,188,16],[60,239,256,223,23],[61,191,186,277,23],[62,209,198,160,23],[63,179,133,197,38],[64,268,204,294,21],[65,209,260,286,36],[66,173,118,142,15],[67,177,222,220,23],[68,289,351,280,43],[69,476,139,151,11],[70,188,237,381,70],[71,163,273,177,18],[72,243,296,333,28],[73,228,225,227,24],[74,324,180,315,28],[75,199,167,194,14],[76,242,218,337,30],[77,290,153,326,32],[78,350,182,244,30],[79,213,298,312,47],[80,317,201,172,20],[81,164,190,283,21],[82,78,132,202,10],[83,233,210,192,21],[84,217,172,174,16],[85,305,236,217,25],[86,183,275,299,27],[87,269,90,57,14],[88,287,224,202,26],[89,224,214,132,13],[90,346,300,314,27],[91,347,351,244,45],[92,253,158,210,17],[93,377,180,212,26],[94,199,193,196,18],[95,139,330,194,24],[96,148,238,241,16],[97,204,223,263,21],[98,131,99,121,15],[99,205,228,247,13],[100,268,192,223,19],[101,356,183,266,15],[102,226,205,236,13],[103,255,131,261,22],[104,241,183,362,28],[105,152,123,154,6],[106,132,270,175,29],[107,108,204,183,15],[108,162,177,197,15],[109,185,178,262,22],[110,66,56,86,10],[111,161,128,184,8],[112,182,169,244,14],[113,201,237,261,24],[114,203,221,266,57],[115,69,176,156,18],[116,260,181,262,19],[117,248,154,121,10],[118,342,220,231,26],[119,199,219,167,18],[120,137,145,186,14],[121,205,278,309,17],[122,183,255,286,26],[123,209,217,193,17],[124,142,176,311,17],[125,93,195,226,30],[126,131,213,189,14],[127,163,170,204,11],[128,195,182,200,19],[129,291,288,355,41],[130,166,253,215,19],[131,110,229,187,7],[132,273,184,176,19],[133,227,140,268,20],[134,382,202,214,22],[135,191,196,155,19],[136,283,278,295,15],[137,253,303,192,17],[138,350,120,105,14],[139,133,242,169,20],[140,216,105,72,6],[141,466,126,148,17],[142,381,271,96,20],[143,208,125,86,6],[144,440,227,189,25],[145,77,99,67,12],[146,409,193,277,36],[147,365,236,254,15],[148,344,141,178,20],[149,404,136,234,37],[150,284,295,229,21],[151,188,148,203,14],[152,224,214,237,15],[153,149,273,342,27],[154,127,129,104,12],[155,319,228,188,37],[156,211,214,245,26],[157,306,304,278,36],[158,272,290,170,26],[159,401,254,218,30],[160,211,164,174,13],[161,143,158,152,22],[162,193,154,116,21],[163,173,149,141,22],[164,196,184,219,37],[165,480,212,308,27],[166,172,212,168,25],[167,239,183,134,18],[168,106,163,127,7],[169,292,232,192,19],[170,283,148,125,12],[171,321,225,169,39],[172,230,145,104,16],[173,211,200,161,34],[174,196,176,140,14],[175,251,215,193,25],[176,319,318,147,26],[177,233,281,207,30],[178,261,181,211,21],[179,327,155,182,16],[180,198,106,71,14],[181,238,200,167,24],[182,270,138,195,17],[183,318,227,180,20],[184,237,247,176,21],[185,261,266,178,18],[186,433,305,239,38],[187,278,175,143,13],[188,220,250,221,51],[189,385,187,233,31],[190,499,265,140,16],[191,302,153,143,21],[192,133,306,242,24],[193,225,215,236,22],[194,147,151,187,19],[195,218,236,201,24],[196,169,115,131,18],[197,381,139,120,11],[198,334,164,99,10],[199,119,175,152,14],[200,122,267,131,19],[201,304,291,239,48],[202,212,343,284,45],[203,537,186,147,38],[204,313,219,352,41],[205,110,225,231,17],[206,228,217,351,40],[207,220,264,333,32],[208,365,195,162,16],[209,255,118,155,18],[210,117,270,181,20],[211,172,175,136,16],[212,226,179,156,14],[213,161,123,122,11],[214,193,373,296,25],[215,231,318,289,21],[216,213,344,271,41],[217,286,298,259,17],[218,169,384,336,32],[219,207,246,375,37],[220,204,308,234,13],[221,219,261,208,27],[222,206,241,273,43],[223,223,146,133,19],[224,116,139,177,15],[225,302,178,156,12],[226,218,270,181,25],[227,246,160,213,10],[228,207,118,157,16],[229,173,145,154,17],[230,234,126,148,18],[231,426,294,297,32],[232,188,132,211,16],[233,237,255,177,22],[234,187,170,236,16],[235,284,134,194,11],[236,483,243,264,37],[237,190,111,144,11],[238,467,143,329,26],[239,334,176,304,34],[240,352,263,200,16],[241,283,153,224,19],[242,150,122,129,12],[243,266,244,292,31],[244,244,183,199,20],[245,192,120,167,26],[246,231,121,133,13],[247,144,198,144,23],[248,242,255,212,16],[249,239,130,224,31],[250,149,172,179,23],[251,219,133,135,28],[252,221,226,251,23],[253,169,206,227,27],[254,333,219,252,25],[255,233,340,184,27],[256,402,301,297,45],[257,180,155,155,16],[258,142,186,191,36],[259,230,252,253,48],[260,154,114,90,32],[261,235,166,201,16],[262,256,202,246,21],[263,97,189,235,17],[264,144,239,184,16],[265,228,265,239,62],[266,270,376,358,43],[267,276,306,215,22],[268,318,339,259,19],[269,218,243,110,19],[270,251,165,147,15],[271,284,169,284,20],[272,306,143,254,41],[273,293,184,281,31],[274,78,100,122,17],[275,272,188,173,14],[276,235,186,139,16],[277,189,152,250,34],[278,233,110,142,20],[279,134,127,197,21],[280,206,176,132,19],[281,189,241,354,41],[282,286,147,290,33],[283,228,336,279,41],[284,145,192,138,27],[285,188,180,162,28]];
+const P = ["AIADMK","TVK","DMK"];
+const COL = {AIADMK:"var(--aiadmk)",TVK:"var(--tvk)",DMK:"var(--dmk)",Others:"var(--others)",Tie:"var(--others)"};
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const fmt = d3.format(",");
+
+const rows = RAW.map(([b,a,d,t,o]) => {
+  const tot = a+d+t+o;
+  const arr = [["AIADMK",a],["DMK",d],["TVK",t]].sort((x,y)=>y[1]-x[1]);
+  const tie = arr[0][1]===arr[1][1];
+  return {b,a,d,t,o,tot,win: tie?"Tie":arr[0][0], row: tie?"TVK":arr[0][0],
+          m:(arr[0][1]-arr[1][1])/tot*100, h:(t-d)/tot*100, j:((b*9301+49297)%233280)/233280};
+});
+const A=d3.sum(rows,r=>r.a), D=d3.sum(rows,r=>r.d), T=d3.sum(rows,r=>r.t), O=d3.sum(rows,r=>r.o), G=A+D+T+O;
+const share = {AIADMK:A/G*100, TVK:T/G*100, DMK:D/G*100, Others:O/G*100};
+const r1 = v => Math.round(v*10)/10;
+const med = {}; P.forEach(p=>med[p]=d3.median(rows.filter(r=>r.win===p),r=>r.m));
+const count = {}; P.forEach(p=>count[p]=rows.filter(r=>r.win===p).length);
+const strongholds = rows.filter(r=>r.win==="AIADMK" && r.m>35);
+const crossAt = (A-T)/(2*A)*100;
+const h2hT = rows.filter(r=>r.h>0).length, h2hD = rows.filter(r=>r.h<0).length;
+
+const box = document.getElementById("chartBox");
+const svg = d3.select("#viz");
+const tip = document.getElementById("tip");
+const gZone = svg.append("g"), gAxis = svg.append("g"), gBars = svg.append("g"),
+      gWhat = svg.append("g"), gDots = svg.append("g"), gAnno = svg.append("g");
+
+let W, H, M, R, cur = null, prev = null, sliderVal = 5;
+let xs, rowB, xh, hY, xb, yb, xw, yw;
+
+function swarm(xf, yf, ys, kx, ky){
+  const nodes = rows.map(r=>({r, x:xf(r), y:yf(r)+(r.j-.5)*4, tx:xf(r), ty:yf(r)}));
+  const sim = d3.forceSimulation(nodes)
+    .force("x", d3.forceX(n=>n.tx).strength(1))
+    .force("y", d3.forceY(n=>n.ty).strength(ys))
+    .force("c", d3.forceCollide(R+.6).iterations(2)).stop();
+  for (let i=0;i<220;i++) sim.tick();
+  nodes.forEach(n=>{ n.r[kx]=n.x; n.r[ky]=n.y; });
+}
+
+function layout(){
+  const rect = box.getBoundingClientRect();
+  W = Math.max(280, rect.width); H = Math.max(260, rect.height);
+  svg.attr("viewBox",`0 0 ${W} ${H}`);
+  const small = W < 520;
+  M = {t:18, r: small?16:26, b:46, l: small?86:96};
+  R = small ? 2.6 : (W<760 ? 3.2 : 3.8);
+  const iw = W-M.l-M.r, ih = H-M.t-M.b;
+
+  xb = d3.scaleLinear().domain([0,40]).range([M.l, M.l+iw*0.62]);
+  yb = d3.scaleBand().domain(["AIADMK","TVK","DMK","Others"]).range([M.t+ih*0.12, M.t+ih*0.88]).padding(0.45);
+  rows.forEach(r=>{
+    const p = r.row;
+    r.bx = M.l + r.j*(xb(share[p])-M.l);
+    r.by = yb(p) + yb.bandwidth()*(((r.b*7919)%100)/100);
+  });
+
+  xs = d3.scaleLinear().domain([0,44]).range([M.l, M.l+iw]);
+  rowB = d3.scaleBand().domain(P).range([M.t, M.t+ih]).paddingInner(0.14);
+  swarm(r=>xs(r.m), r=>rowB(r.row)+rowB.bandwidth()/2, 0.06, "sx","sy");
+
+  const ext = Math.ceil(d3.max(rows,r=>Math.abs(r.h))/5)*5;
+  xh = d3.scaleLinear().domain([-ext,ext]).range([M.r+10, W-M.r-10]);
+  hY = M.t + ih*0.52;
+  swarm(r=>xh(r.h), ()=>hY, 0.03, "hx","hy");
+
+  xw = d3.scaleLinear().domain([0,30]).range([M.l, W-M.r-(small?78:104)]);
+  yw = d3.scaleLinear().domain([20,45]).range([M.t+ih, M.t+10]);
+}
+
+const isStrip = s => s==="close"||s==="aiadmk"||s==="strong";
+const isWhat = s => s==="whatif"||s==="cross"||s==="try"||s==="margin";
+
+const HEAD = {
+  bars:["Vote share, Madurantakam, April 2026","All valid votes polled"],
+  close:["285 booths by winning margin","Each dot is a booth. The shaded band marks leads under 5%."],
+  aiadmk:["How big each party's booth wins were","AIADMK highlighted. The black tick marks each party's median booth win."],
+  strong:["How big each party's booth wins were","AIADMK's six stronghold booths circled"],
+  h2h:["TVK against DMK, booth by booth","Gap between TVK's and DMK's share of the vote in each booth"],
+  whatif:["If AIADMK voters follow their MLA to TVK","Vote share as a growing share of AIADMK's April vote moves to TVK"],
+  cross:["If AIADMK voters follow their MLA to TVK","Vote share as a growing share of AIADMK's April vote moves to TVK"],
+  try:["If AIADMK voters follow their MLA to TVK","Your scenario is marked on the chart"],
+  margin:["If AIADMK voters follow their MLA to TVK","Past the line, TVK leads. How far past it TVK lands is the real signal."]
+};
+
+function T_(sel, dur){ return dur ? sel.transition().duration(dur).ease(d3.easeCubicInOut) : sel; }
+
+function draw(dur){
+  const s = cur;
+  document.getElementById("chartTitle").textContent = HEAD[s][0];
+  document.getElementById("chartNote").textContent = HEAD[s][1];
+  drawBars(s, dur); drawStripChrome(s, dur); drawH2H(s, dur); drawWhat(s, dur); drawDots(s, dur);
+}
+
+function drawBars(s, dur){
+  const on = s==="bars";
+  const cats = ["AIADMK","TVK","DMK","Others"];
+  const g1=(r1(share.AIADMK)-r1(share.TVK)).toFixed(1), g2=(r1(share.TVK)-r1(share.DMK)).toFixed(1);
+  const gaps = W<520 ? {TVK:`${g1} pts back`, DMK:`${g2} pts back`} : {TVK:`${g1} pts behind AIADMK`, DMK:`${g2} pts behind TVK`};
+  const g = gBars.selectAll("g.bar").data(cats).join(en=>{
+    const e = en.append("g").attr("class","bar");
+    e.append("rect").attr("rx",2);
+    e.append("text").attr("class","lab");
+    e.append("text").attr("class","val");
+    e.append("text").attr("class","gap");
+    return e;
+  });
+  g.select("rect").attr("y",c=>yb(c)).attr("height",yb.bandwidth()).attr("x",M.l)
+    .style("fill",c=>COL[c]);
+  T_(g.select("rect"), dur).attr("width", c=> on ? xb(share[c])-M.l : 0);
+  g.select(".lab").attr("x",M.l-10).attr("y",c=>yb(c)+yb.bandwidth()/2).attr("dy","0.35em")
+    .attr("text-anchor","end").style("fill","var(--ink)").style("font-weight",c=>c==="Others"?400:700)
+    .style("font-size", W<520?"13px":"15px").text(c=>c);
+  g.select(".val").attr("x",c=>xb(share[c])+8).attr("y",c=>yb(c)+yb.bandwidth()/2).attr("dy","0.35em")
+    .style("fill","var(--ink)").style("font-weight",700).style("font-size",W<520?"14px":"17px").text(c=>share[c].toFixed(1)+"%");
+  g.select(".gap").attr("x",c=>xb(share[c])+(W<520?58:70)).attr("y",c=>yb(c)+yb.bandwidth()/2).attr("dy","0.35em")
+    .style("fill","var(--muted)").style("font-size",W<520?"11.5px":"13px").text(c=>gaps[c]||"");
+  T_(gBars, dur).style("opacity", on?1:0);
+  gBars.style("pointer-events","none");
+}
+
+function drawStripChrome(s, dur){
+  const on = isStrip(s);
+  const zone = gZone.selectAll("rect").data([0]).join("rect");
+  zone.attr("x",xs(0)).attr("width",xs(5)-xs(0)).attr("y",M.t).attr("height",H-M.t-M.b).style("fill","var(--zone)");
+  T_(zone, dur).style("opacity", on ? 1 : 0);
+
+  gAxis.selectAll("*").remove();
+  if (on){
+    const ax = gAxis.append("g").attr("transform",`translate(0,${H-M.b+6})`);
+    const ticks = [0,5,10,20,30,40];
+    ax.selectAll("text").data(ticks).join("text").attr("x",d=>xs(d)).attr("y",12)
+      .attr("text-anchor","middle").style("fill","var(--muted)").style("font-size","12px").text(d=>d+"%");
+    ax.append("text").attr("x",xs(44)).attr("y",32).attr("text-anchor","end").style("fill","var(--muted)")
+      .style("font-size","12px").text("Winner's lead over the runner-up in the booth");
+    const labs = gAxis.selectAll("g.rl").data(P).join("g").attr("class","rl");
+    labs.append("text").attr("x",M.l-12).attr("y",p=>rowB(p)+rowB.bandwidth()/2-4).attr("text-anchor","end")
+      .style("fill","var(--ink)").style("font-weight",700).style("font-size",W<520?"13px":"15px").text(p=>p);
+    labs.append("text").attr("x",M.l-12).attr("y",p=>rowB(p)+rowB.bandwidth()/2+13).attr("text-anchor","end")
+      .style("fill","var(--muted)").style("font-size","11.5px").text(p=>p==="TVK"?`${count[p]} + 1 tie`:`${count[p]} booths`);
+    if (s==="close"){
+      gAxis.append("text").attr("x",xs(5)+6).attr("y",M.t+12).style("fill","var(--accent)").style("font-weight",700)
+        .style("font-size","13px").text("110 booths decided by under 5%");
+    }
+  }
+
+  const mOn = s==="aiadmk"||s==="strong";
+  const mk = gAnno.selectAll("g.med").data(mOn?P:[]).join(en=>{
+    const e = en.append("g").attr("class","med").style("opacity",0);
+    e.append("line"); e.append("text"); return e;
+  });
+  mk.select("line").attr("x1",p=>xs(med[p])).attr("x2",p=>xs(med[p]))
+    .attr("y1",p=>rowB(p)+rowB.bandwidth()*0.12).attr("y2",p=>rowB(p)+rowB.bandwidth()*0.88)
+    .style("stroke","var(--ink)").style("stroke-width",2.5);
+  mk.select("text").attr("x",p=>xs(med[p])+5).attr("y",p=>rowB(p)+rowB.bandwidth()*0.12+10)
+    .style("fill","var(--ink)").style("font-size","12px").style("font-weight",p=>p==="AIADMK"?700:400)
+    .text(p=>`median ${med[p].toFixed(1)}%`);
+  T_(mk, dur).style("opacity",1);
+
+  const sOn = s==="strong";
+  const rings = gAnno.selectAll("circle.ring").data(sOn?strongholds:[], r=>r.b).join("circle").attr("class","ring");
+  rings.attr("cx",r=>r.sx).attr("cy",r=>r.sy).attr("r",R+5).style("fill","none")
+    .style("stroke","var(--accent)").style("stroke-width",2);
+  const sl = gAnno.selectAll("text.slab").data(sOn?[0]:[]).join("text").attr("class","slab");
+  if (sOn){
+    const minX = d3.min(strongholds,r=>r.sx), topY = d3.min(strongholds,r=>r.sy);
+    sl.attr("x",W-M.r).attr("y",d3.max(strongholds,r=>r.sy)+R+22).attr("text-anchor","end")
+      .style("fill","var(--accent)").style("font-weight",700).style("font-size","13px")
+      .text(W<520 ? "6 strongholds, 37 to 42%" : "6 stronghold booths, won by 37 to 42%");
+  }
+}
+
+function drawH2H(s, dur){
+  const on = s==="h2h";
+  let g = gAnno.selectAll("g.h2h").data([0]).join("g").attr("class","h2h");
+  g.selectAll("*").remove();
+  if (!on) return;
+  g.append("line").attr("x1",xh(0)).attr("x2",xh(0)).attr("y1",M.t+30).attr("y2",H-M.b)
+    .style("stroke","var(--muted)").style("stroke-dasharray","4 4");
+  const fs = W<520?"13px":"15px";
+  g.append("text").attr("x",xh(0)-10).attr("y",M.t+18).attr("text-anchor","end").style("fill","var(--dmk)")
+    .style("font-weight",700).style("font-size",fs).text(`DMK ahead: ${h2hD} booths`);
+  g.append("text").attr("x",xh(0)+10).attr("y",M.t+18).style("fill","var(--tvk)")
+    .style("font-weight",700).style("font-size",fs).text(`TVK ahead: ${h2hT} booths`);
+  const ext = xh.domain()[1];
+  const step = ext>20 ? 10 : 5; const ticks = d3.range(-Math.floor(ext/step)*step, Math.floor(ext/step)*step+0.1, step);
+  g.selectAll("text.t").data(ticks).join("text").attr("class","t").attr("x",d=>xh(d)).attr("y",H-M.b+18)
+    .attr("text-anchor","middle").style("fill","var(--muted)").style("font-size","12px")
+    .text(d=> d===0 ? "Level" : `${Math.abs(d)} pts`);
+  g.append("text").attr("x",W/2).attr("y",H-M.b+38).attr("text-anchor","middle").style("fill","var(--muted)")
+    .style("font-size","12px").text("Points of the booth vote separating TVK and DMK");
+  g.style("opacity",0); T_(g, dur).style("opacity",1);
+}
+
+function drawWhat(s, dur){
+  const on = isWhat(s);
+  const enter = on && !isWhat(prev);
+  gWhat.selectAll("*").remove();
+  if (!on) return;
+  const small = W<520;
+  const ax = gWhat.append("g");
+  const xt = [0,5,10,15,20,25,30];
+  ax.selectAll("text.x").data(xt).join("text").attr("class","x").attr("x",d=>xw(d)).attr("y",yw(20)+18)
+    .attr("text-anchor","middle").style("fill","var(--muted)").style("font-size","12px")
+    .text(d=> d===0 ? "April" : d+"%");
+  ax.append("text").attr("x",xw(30)).attr("y",yw(20)+38).attr("text-anchor","end").style("fill","var(--muted)")
+    .style("font-size","12px").text("Share of AIADMK's April voters who switch to TVK");
+  const yt = [20,25,30,35,40,45];
+  ax.selectAll("line.g").data(yt).join("line").attr("class","g").attr("x1",xw(0)).attr("x2",xw(30))
+    .attr("y1",d=>yw(d)).attr("y2",d=>yw(d)).style("stroke","var(--rule)");
+  ax.selectAll("text.y").data(yt).join("text").attr("class","y").attr("x",xw(0)-10).attr("y",d=>yw(d)).attr("dy","0.35em")
+    .attr("text-anchor","end").style("fill","var(--muted)").style("font-size","12px").text(d=>d+"%");
+
+  if (s==="margin"){
+    gWhat.append("rect").attr("x",xw(crossAt)).attr("width",xw(30)-xw(crossAt)).attr("y",yw(45)).attr("height",yw(20)-yw(45))
+      .style("fill","var(--zone)");
+    gWhat.append("text").attr("x",xw(30)-6).attr("y",yw(45)+16).attr("text-anchor","end").style("fill","var(--accent)")
+      .style("font-weight",700).style("font-size","13px").text("TVK ahead");
+  }
+
+  const fn = {AIADMK:x=>share.AIADMK*(1-x/100), TVK:x=>share.TVK+share.AIADMK*x/100, DMK:()=>share.DMK};
+  const line = p => d3.line().x(x=>xw(x)).y(x=>yw(fn[p](x)))([0,30]);
+  P.forEach(p=>{
+    const path = gWhat.append("path").attr("d",line(p)).style("fill","none").style("stroke",COL[p])
+      .style("stroke-width",3.5).style("stroke-linecap","round");
+    if (enter && dur){
+      const L = path.node().getTotalLength();
+      path.attr("stroke-dasharray",`${L} ${L}`).attr("stroke-dashoffset",L)
+        .transition().duration(1100).ease(d3.easeCubicOut).attr("stroke-dashoffset",0);
+    }
+    const endY = yw(fn[p](30)) + (p==="DMK" ? 0 : 0);
+    gWhat.append("text").attr("x",xw(30)+8).attr("y",endY).attr("dy","0.35em").style("fill",COL[p])
+      .style("font-weight",700).style("font-size",small?"12.5px":"14px")
+      .text(`${p} ${fn[p](30).toFixed(1)}%`);
+    gWhat.append("circle").attr("cx",xw(0)).attr("cy",yw(fn[p](0))).attr("r",4).style("fill",COL[p]);
+  });
+
+  if (s==="cross"||s==="try"||s==="margin"){
+    const cx = xw(crossAt), cy = yw(fn.TVK(crossAt));
+    const cg = gWhat.append("g");
+    cg.append("line").attr("x1",cx).attr("x2",cx).attr("y1",yw(45)).attr("y2",yw(20))
+      .style("stroke","var(--accent)").style("stroke-width",2).style("stroke-dasharray","3 4");
+    cg.append("circle").attr("cx",cx).attr("cy",cy).attr("r",5.5).style("fill","var(--accent)");
+    const tx = cg.append("text").attr("x",cx+10).attr("y",yw(44)).style("fill","var(--accent)")
+      .style("font-weight",700).style("font-size",small?"12.5px":"14px");
+    tx.append("tspan").attr("x",cx+10).text("At 5%, TVK takes the lead");
+    tx.append("tspan").attr("x",cx+10).attr("dy","1.3em").style("font-weight",400)
+      .text(`About ${fmt(Math.round(A*crossAt/100/100)*100)} voters`);
+    if (dur && s==="cross" && prev!=="try" && prev!=="margin"){ cg.style("opacity",0).transition().duration(500).style("opacity",1); }
+  }
+
+  if (s==="try"){
+    const v = sliderVal, x = xw(v);
+    const mg = gWhat.append("g").attr("class","marker");
+    mg.append("line").attr("x1",x).attr("x2",x).attr("y1",yw(45)).attr("y2",yw(20))
+      .style("stroke","var(--ink)").style("stroke-width",1.5);
+    P.forEach(p=> mg.append("circle").attr("cx",x).attr("cy",yw(fn[p](v))).attr("r",5)
+      .style("fill",COL[p]).style("stroke","var(--paper)").style("stroke-width",2));
+    mg.append("text").attr("x",x).attr("y",yw(20)-8).attr("text-anchor", v>24?"end":"middle")
+      .attr("dx", v>24?-6:0).style("fill","var(--ink)").style("font-weight",700).style("font-size","13px")
+      .text(`${v}%`);
+  }
+  gWhat.style("opacity",1);
+}
+
+function drawDots(s, dur){
+  const dots = gDots.selectAll("circle").data(rows, r=>r.b).join(en=>
+    en.append("circle").attr("cx",r=>r.bx).attr("cy",r=>r.by).attr("r",R).style("opacity",0)
+      .on("pointerenter", showTip).on("pointermove", showTip).on("pointerleave", hideTip));
+  dots.attr("r",R);
+  let xk, yk, op, fill;
+  if (s==="bars" || isWhat(s)){
+    xk = s==="bars" ? "bx" : "hx"; yk = s==="bars" ? "by" : "hy"; op = ()=>0; fill = r=>COL[r.row];
+  } else if (isStrip(s)){
+    xk="sx"; yk="sy";
+    if (s==="close"){ fill = r=>COL[r.win]; op = r=> r.m<5 ? 1 : 0.25; }
+    else { fill = r=> r.win==="AIADMK" ? "var(--aiadmk)" : "var(--dot-mute)"; op = ()=>1; }
+  } else {
+    xk="hx"; yk="hy"; fill = r=> r.h>0 ? "var(--tvk)" : (r.h<0 ? "var(--dmk)" : "var(--others)"); op = ()=>1;
+  }
+  dots.style("pointer-events", (s==="bars"||isWhat(s)) ? "none" : "auto");
+  const tr = T_(dots, dur ? dur+200 : 0);
+  if (dur) tr.delay(r => (s==="close" && prev==="bars") ? r.j*350 : 0);
+  tr.attr("cx",r=>r[xk]).attr("cy",r=>r[yk]).style("fill",fill).style("opacity",op);
+}
+
+function showTip(ev, r){
+  let html;
+  if (cur==="h2h"){
+    html = `<b>Booth ${r.b}</b><br>TVK ${(r.t/r.tot*100).toFixed(1)}%, DMK ${(r.d/r.tot*100).toFixed(1)}%`;
+  } else if (r.win==="Tie"){
+    html = `<b>Booth ${r.b}</b><br>AIADMK and TVK tied on ${r.a} votes`;
+  } else {
+    html = `<b>Booth ${r.b}</b><br>${r.win} won by ${r.m.toFixed(1)}%`;
+  }
+  tip.innerHTML = html;
+  const b = box.getBoundingClientRect();
+  let x = ev.clientX - b.left + 12, y = ev.clientY - b.top - 40;
+  if (x > b.width - 170) x = ev.clientX - b.left - 170;
+  tip.style.left = x+"px"; tip.style.top = Math.max(0,y)+"px"; tip.style.opacity = 1;
+}
+function hideTip(){ tip.style.opacity = 0; }
+
+function go(state){
+  if (state===cur) return;
+  prev = cur; cur = state; hideTip();
+  draw(reduce || prev===null ? 0 : 750);
+}
+
+const slider = document.getElementById("shift");
+function readout(){
+  sliderVal = +slider.value;
+  document.getElementById("shiftVal").textContent = sliderVal+"%";
+  const mv = Math.round(A*sliderVal/100), a = A-mv, t = T+mv, diff = t-a;
+  const lead = diff>0 ? `TVK ahead by ${fmt(diff)} votes.` : diff<0 ? `ADMK still ahead by ${fmt(-diff)} votes.` : "Dead heat.";
+  document.getElementById("readout").textContent =
+    `${fmt(mv)} voters switch. ADMK ${fmt(a)}, TVK ${fmt(t)}, DMK ${fmt(D)}. ${lead}`;
+  if (cur==="try") draw(0);
+}
+slider.addEventListener("input", readout);
+
+const steps = Array.from(document.querySelectorAll(".step"));
+let ticking = false;
+function onScroll(){
+  if (ticking) return; ticking = true;
+  requestAnimationFrame(()=>{
+    ticking = false;
+    const mobile = window.innerWidth <= 860;
+    const trig = window.innerHeight * (mobile ? 0.9 : 0.55);
+    let active = steps[0];
+    steps.forEach(s=>{ if (s.querySelector(".step-inner").getBoundingClientRect().top < trig) active = s; });
+    steps.forEach(s=>s.classList.toggle("is-active", s===active));
+    go(active.dataset.step);
+  });
+}
+
+let rT;
+function onResize(){
+  clearTimeout(rT);
+  rT = setTimeout(()=>{ layout(); if (cur){ const c=cur; prev=c; draw(0);} }, 150);
+}
+
+layout();
+readout();
+cur = null;
+go("bars");
+steps[0].classList.add("is-active");
+window.addEventListener("scroll", onScroll, {passive:true});
+window.addEventListener("resize", onResize);
+onScroll();
+})();
+</script>
+</body>
+</html>
