@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Dharapuram's Two Battles</title>
+<meta name="description" content="A booth-by-booth look at Dharapuram's April 2026 result and what decides the 6 October by-election.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: long-form scrolly. Text steps on the left, one sticky chart per section on the right;
+   on phones the chart sticks to the top and step cards pass over its lower edge. */
+:root {
+  --bg: #f7f6f9;
+  --card: #ffffff;
+  --ink: #16141c;
+  --ink-2: #4a4756;
+  --muted: #6c6879;
+  --rule: #dedbe6;
+  --wash: #ecebf1;
+  --accent: #5b3fa3;          /* indelible-ink violet */
+  --aiadmk: #15803d;
+  --dmk: #dc2626;
+  --tvk: #e3a600;
+  --tvk-text: #e3a600;
+  --tvk-edge: #8a6400;
+  --others: #b8b5c4;
+  --tie: #8c889b;
+  --dmk-2: #f1a9a6;
+  --on-party: #ffffff;
+  --on-tvk: #16141c;
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --step: 1.0625rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121117; --card: #1b1a22; --ink: #eceaf3; --ink-2: #bcb8c9; --muted: #918da1;
+    --rule: #2f2d39; --wash: #24222c; --accent: #a993f2;
+    --aiadmk: #14a383; --dmk: #dc3a3a; --tvk: #bd8b00; --tvk-text: #f2b705; --tvk-edge: transparent; --others: #5d596b; --tie: #8c889b;
+    --dmk-2: #7a3337; --on-party: #ffffff; --on-tvk: #121117;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121117; --card: #1b1a22; --ink: #eceaf3; --ink-2: #bcb8c9; --muted: #918da1;
+  --rule: #2f2d39; --wash: #24222c; --accent: #a993f2;
+  --aiadmk: #14a383; --dmk: #dc3a3a; --tvk: #bd8b00; --tvk-text: #f2b705; --tvk-edge: transparent; --others: #5d596b; --tie: #8c889b;
+  --dmk-2: #7a3337; --on-party: #ffffff; --on-tvk: #121117;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--step);
+  line-height: 1.6;
+  padding-inline: 16px;
+}
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wrap { max-width: 72rem; margin-inline: auto; }
+
+/* ---------- Hero ---------- */
+.hero { padding-block: 3.5rem 2.5rem; display: grid; gap: 1.25rem; max-width: 50rem; }
+.kicker {
+  display: flex; align-items: center; gap: .6rem;
+  font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2);
+}
+.ink { width: .45rem; height: 1.25rem; border-radius: .3rem .3rem .2rem .2rem; background: var(--accent); flex: none; }
+h1 {
+  margin: 0; font-family: var(--display); font-stretch: 72%; font-weight: 800;
+  font-size: clamp(2.3rem, 6.2vw, 4.4rem); line-height: .98; letter-spacing: -.01em; text-wrap: balance;
+}
+h1 .a { color: var(--aiadmk); } h1 .d { color: var(--dmk); } h1 .t { color: var(--tvk-text); -webkit-text-stroke: 0.6px var(--tvk-edge); paint-order: stroke fill; }
+.lead { margin: 0; font-size: 1.2rem; line-height: 1.55; color: var(--ink); max-width: 40rem; }
+.byline { font-family: var(--mono); font-size: .78rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: .3rem 1rem; }
+
+/* ---------- Section heads ---------- */
+.part { padding-block: 3rem 1rem; border-top: 1px solid var(--rule); display: grid; gap: .5rem; max-width: 46rem; }
+.part .eyebrow { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.part h2 { margin: 0; font-family: var(--display); font-stretch: 75%; font-weight: 800; font-size: clamp(1.9rem, 4.4vw, 2.8rem); line-height: 1; text-wrap: balance; }
+
+/* ---------- Scrolly ---------- */
+.scrolly { position: relative; display: grid; grid-template-columns: minmax(0, 23rem) minmax(0, 1fr); gap: 3rem; }
+.steps { position: relative; z-index: 2; padding-block: 30vh 45vh; display: grid; gap: 70vh; min-width: 0; }
+.step {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 1.1rem 1.25rem; color: var(--ink-2);
+  transition: color .3s, border-color .3s, box-shadow .3s;
+  min-width: 0;
+}
+.step p { margin: 0; }
+.step p + p { margin-top: .7rem; }
+.step.is-active { color: var(--ink); border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); box-shadow: 0 6px 24px -14px color-mix(in srgb, var(--ink) 50%, transparent); }
+.step strong { font-weight: 600; color: var(--ink); }
+.step .fn.fn-phone { display: none; }
+.step .fn { display: block; margin-top: .7rem; font-family: var(--mono); font-size: .72rem; line-height: 1.5; color: var(--muted); }
+.graphic { position: sticky; top: env(safe-area-inset-top, 0px); height: 100vh; height: 100svh; padding-block: 1.5rem; z-index: 1; min-width: 0; align-self: start; grid-column: 2; grid-row: 1; }
+.steps { grid-column: 1; grid-row: 1; }
+.fig { position: relative; width: 100%; height: 100%; }
+.fig svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+@media (max-width: 860px) {
+  .scrolly { display: block; }
+  .graphic { height: 58vh; height: 58svh; padding-block: .75rem .5rem; background: var(--bg); }
+  .steps { padding-block: 32vh 40vh; gap: 88vh; }
+  .step .fn.fn-phone { display: block; }
+  .step { max-width: 34rem; margin-inline: auto; box-shadow: 0 8px 28px -12px color-mix(in srgb, var(--ink) 45%, transparent); }
+}
+
+/* ---------- SVG text and marks ---------- */
+.fig text { font-family: var(--mono); fill: var(--ink-2); font-size: 11.5px; }
+.fig .t-title { font-family: var(--display); font-stretch: 85%; font-weight: 700; font-size: 15px; fill: var(--ink); }
+.fig .t-sub { font-size: 11px; fill: var(--muted); }
+.fig .t-strong { fill: var(--ink); font-weight: 600; }
+.fig .t-big { font-family: var(--display); font-stretch: 75%; font-weight: 800; font-size: 26px; fill: var(--ink); }
+.fig .t-on { fill: var(--on-party); font-weight: 600; }
+.fig .t-on-tvk { fill: var(--on-tvk); font-weight: 600; }
+.fig .axis line, .fig .axis path { stroke: var(--rule); }
+.fig .grid line { stroke: var(--rule); stroke-width: 1; }
+.fig rect.unit { transition: fill .45s ease, opacity .45s ease; }
+.fig .layer { transition: opacity .45s ease; }
+.fig .chip rect { fill: var(--card); stroke: var(--muted); stroke-width: 1; }
+.fig .chip.anchor-dmk rect { fill: var(--dmk); stroke: none; }
+.fig .chip.anchor-tvk rect { fill: var(--tvk); stroke: none; }
+.fig .chip.anchor-dmk text { fill: var(--on-party); font-weight: 600; }
+.fig .chip.anchor-tvk text { fill: var(--on-tvk); font-weight: 600; }
+.fig .chip text { fill: var(--ink); font-size: 12px; }
+
+/* ---------- Plain sections ---------- */
+.prose { max-width: 40rem; padding-block: 1rem 2rem; }
+.prose p { margin: 0 0 1rem; }
+.watch { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; padding-block: .5rem 1.5rem; }
+.q {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 1.25rem;
+  display: grid; gap: .75rem; align-content: start; min-width: 0;
+}
+.q .who { display: flex; align-items: center; gap: .5rem; font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.q .sw { width: .8rem; height: .8rem; border-radius: 3px; flex: none; }
+.q h3 { margin: 0; font-family: var(--display); font-stretch: 80%; font-weight: 800; font-size: 1.45rem; line-height: 1.08; text-wrap: balance; }
+.q p { margin: 0; color: var(--ink-2); font-size: 1rem; }
+.q .checks-label { font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.q ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .35rem; font-size: .97rem; }
+.callout { max-width: 40rem; font-family: var(--mono); font-size: .82rem; color: var(--ink-2); border-top: 1px solid var(--rule); padding-block: 1rem 0; }
+.about { border-top: 1px solid var(--rule); margin-top: 3rem; padding-block: 2rem 4rem; display: grid; gap: 1rem; max-width: 46rem; font-size: .95rem; color: var(--ink-2); }
+.about h2 { margin: 0; font-family: var(--display); font-stretch: 80%; font-weight: 800; font-size: 1.4rem; color: var(--ink); }
+.about ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .45rem; }
+.about .src { font-family: var(--mono); font-size: .78rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fig rect.unit, .fig .layer, .step { transition: none; }
+}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+
+<header class="hero">
+  <div class="kicker"><span class="ink" aria-hidden="true"></span>Dharapuram (SC) · By-election, 6 October 2026</div>
+  <h1>In the Villages, <span class="t">TVK</span> Fought <span class="a">AIADMK</span>. In the Town, It Fought <span class="d">DMK</span>.</h1>
+  <p class="lead">Dharapuram is really two constituencies on a single ballot. In April 2026, the villages gave AIADMK 45%. The town gave it just 24% and put DMK in front. In the first election it faced, TVK fought two battles: it found its votes in different places. In the villages, it was strongest where AIADMK was weak, and in the town, it was strongest where DMK was weakest. So 6th October is TVK against AIADMK in the villages, and TVK vs DMK in the town.</p>
+  <div class="byline"><span>By Justin · @justinmoorthy</span><span>1 October 2026</span><span>Data: ECI Form 20, 320 booths</span></div>
+</header>
+
+<!-- ============ Part 1: April ============ -->
+<section class="part" aria-labelledby="p1">
+  <div class="eyebrow">April 2026 · 320 booths</div>
+  <h2 id="p1">Two Dharapurams</h2>
+</section>
+<section class="scrolly" data-block="april">
+  <div class="graphic"><div class="fig" id="fig-april" aria-label="Chart of the April 2026 result in Dharapuram, booth by booth"></div></div>
+  <div class="steps">
+    <div class="step" data-scene="result"><p>AIADMK won in April 2026 with 40.6% of the votes. It wasn't a majority: TVK and DMK together took more than 55% of the votes. The three-way split handed a village-strong AIADMK an edge.</p></div>
+    <div class="step" data-scene="grid"><p>The majority of the booths were in villages, 199 out of 320. This meant AIADMK won almost 7 out of 10 booths. In other words, it won almost everywhere in the villages.</p></div>
+    <div class="step" data-scene="villages"><p>In the villages, AIADMK was dominant. It took 45% of the vote and won 170 of the 199 village booths. DMK came second with 30%, and TVK was a distant third at 21%.</p></div>
+    <div class="step" data-scene="panchayats"><p>The town panchayats looked much the same. AIADMK got 41% and won 44 of the 61 booths.</p></div>
+    <div class="step" data-scene="town"><p>The town was a different story. In Dharapuram's 60 town booths, AIADMK fell to third with just 24%. DMK led with 39%, and TVK was close behind at 33%. AIADMK won only 7 town booths, DMK won 29 and TVK won 24.</p><p>In fact, most of TVK's booth wins, 24 out of 31, came from the town.</p></div>
+    <div class="step" data-scene="margins"><p>So where did AIADMK win the seat? In the villages. It came out of the villages 18,663 votes ahead of DMK and added 3,747 more in the town panchayats. DMK won the town by 5,498, but that was nowhere near enough to close the gap.</p><p>In other words, DMK and TVK fought over the town, while AIADMK won the seat in the villages.</p><span class="fn">Area figures use EVM votes; postal votes are not reported by booth.</span></div>
+  </div>
+</section>
+
+<!-- ============ Part 2: Two battles ============ -->
+<section class="part" aria-labelledby="p2">
+  <div class="eyebrow">Where TVK found its votes</div>
+  <h2 id="p2">Two battles</h2>
+</section>
+<section class="scrolly" data-block="battles">
+  <div class="graphic"><div class="fig" id="fig-battles" aria-label="Line chart of party vote shares in booths grouped by TVK strength"></div></div>
+  <div class="steps">
+    <div class="step" data-scene="villages"><p>Sort the village booths from TVK's weakest to its strongest. As TVK rises, AIADMK falls. DMK barely moves.</p></div>
+    <div class="step" data-scene="town"><p>Do the same in the town and the picture flips. Where TVK was strongest, DMK was weakest. AIADMK barely moves.</p></div>
+    <div class="step" data-scene="town"><p>One election can't show voters moving from one party to another. But it shows where each fight is: TVK against AIADMK in the villages, TVK against DMK in the town.</p></div>
+  </div>
+</section>
+
+<!-- ============ Part 3: DMK's math ============ -->
+<section class="part" aria-labelledby="p3">
+  <div class="eyebrow">The base, the allies, the split</div>
+  <h2 id="p3">DMK's math</h2>
+</section>
+<section class="scrolly" data-block="dmk">
+  <div class="graphic"><div class="fig" id="fig-dmk" aria-label="Charts of DMK's April position and its path to winning the by-election"></div></div>
+  <div class="steps">
+    <div class="step" data-scene="rank"><p>DMK lost in April, but it did not collapse. Even with a new party in the race, one in three voters still chose DMK. It came first or second almost everywhere, in the town and in the villages.</p></div>
+    <div class="step" data-scene="allies"><p>But that one in three was not DMK alone. In April, DMK stood with Congress, VCK, IUML, MDMK and the Left. Today Congress, VCK, IUML and MDMK are with the TVK government, and the CPI has its own candidate in Dharapuram.</p><p>On 6 October, DMK is fighting without most of the allies who helped build its April vote.</p></div>
+    <div class="step" data-scene="window1"><p>That makes the math harder. Even if DMK held every April vote, it would win only if AIADMK and TVK split the rest almost exactly in half. That is a coin landing on its edge, not a plan.</p><p>And holding every April vote is now the best case, not the starting point.</p><span class="fn fn-phone">This is DMK's best case. It assumes DMK keeps all 63,336 of its April EVM votes, including the voters who came to it through Congress, VCK, IUML, MDMK and the Left, and that the only voters who change sides are Sathyabama's April voters who follow her to TVK.</span></div>
+    <div class="step" data-scene="window3"><p>In other words, DMK cannot count on the split. First it has to keep the voters who came to it through its allies. Then it has to grow. At 35%, it wins across a wide range of splits. That is a real path, not a lucky one.</p></div>
+    <div class="step" data-scene="window3"><p>6 October will test DMK's poll strategy. What it learns here will help it plan for future elections without its allies, in the areas where it relied on them.</p></div>
+  </div>
+</section>
+
+<!-- ============ Part 4: TVK's path ============ -->
+<section class="part" aria-labelledby="p4">
+  <div class="eyebrow">Sathyabama's voters</div>
+  <h2 id="p4">TVK's path to victory</h2>
+</section>
+<section class="scrolly" data-block="tvk">
+  <div class="graphic"><div class="fig" id="fig-tvk" aria-label="Chart of votes for each party as Sathyabama's April voters follow her to TVK"></div></div>
+  <div class="steps">
+    <div class="step" data-scene="dots"><p>TVK came third in April, with 23% in its first election.</p></div>
+    <div class="step" data-scene="lines"><p>Now Sathyabama is its candidate. Every voter who follows her counts twice: one less for AIADMK, one more for TVK.</p></div>
+    <div class="step" data-scene="cross"><p>If just over 17,000 follow her, about one in five, TVK wins.</p></div>
+    <div class="step" data-scene="routes"><p>Winning DMK voters is harder. It would take more than half of them. For TVK, one AIADMK voter is worth two DMK voters.</p></div>
+    <div class="step" data-scene="allies"><p>And TVK has help. It is in government, and DMK's April allies are now on its side.</p></div>
+    <div class="step" data-scene="question"><p>The risk: many voted for the Two Leaves, not for her, and AIADMK has a new candidate. So TVK's path runs through the villages.</p></div>
+  </div>
+</section>
+
+<!-- ============ Part 5: What to watch ============ -->
+<section class="part" aria-labelledby="p5">
+  <div class="eyebrow">Counting day · 9 October</div>
+  <h2 id="p5">What to watch</h2>
+</section>
+<div class="prose"><p>Three questions decide this by-election.</p></div>
+<div class="watch">
+  <article class="q">
+    <div class="who"><span class="sw" style="background: var(--tvk)"></span>TVK</div>
+    <h3>Can TVK win over the villages?</h3>
+    <p>In April, TVK was a town party. It won 24 of its 31 booths in the town and got just 21% in the villages. But Sathyabama's voters are in the villages. If TVK is going to win, this is where it has to grow.</p>
+    <div class="checks-label">What to check</div>
+    <ul>
+      <li>TVK's share in the village booths, compared with April's 21%.</li>
+      <li>Does it grow most where AIADMK was strongest? That would mean Sathyabama's voters followed her.</li>
+    </ul>
+  </article>
+  <article class="q">
+    <div class="who"><span class="sw" style="background: var(--dmk)"></span>DMK</div>
+    <h3>Can DMK hold its base?</h3>
+    <p>In April, one in three voters chose DMK, in the town and in the villages. But that was with its allies. This time it stands alone.</p>
+    <div class="checks-label">What to check</div>
+    <ul>
+      <li>DMK's share, compared with April's 32%.</li>
+      <li>Does its floor hold? In April it fell below 20% in only 11 booths.</li>
+      <li>Does it keep the town and its rural belt?</li>
+      <li>Where it slips, who gains: TVK or the CPI?</li>
+    </ul>
+  </article>
+  <article class="q">
+    <div class="who"><span class="sw" style="background: var(--aiadmk)"></span>AIADMK</div>
+    <h3>Can AIADMK hold its village fortress?</h3>
+    <p>In April, the villages were AIADMK's fortress. It won 170 of 199 village booths and took 45% of the village vote. In the town, it came third. If the walls crack in the villages, AIADMK has nowhere else to make up the votes.</p>
+    <div class="checks-label">What to check</div>
+    <ul>
+      <li>AIADMK's village share, compared with April's 45%.</li>
+      <li>How many of its 170 village booths does it keep?</li>
+      <li>Does it hold the town panchayats too, where it won 44 of 61 booths?</li>
+    </ul>
+  </article>
+</div>
+<p class="callout">Compare vote shares, not raw votes. By-election turnout will probably be lower than April's 90%, so every party may lose votes even where it gains ground.</p>
+
+<section class="about" aria-labelledby="about">
+  <h2 id="about">About the data</h2>
+  <ul>
+    <li>Results come from the ECI Form 20 for Dharapuram (AC 101), April 2026. Constituency totals include postal votes. Booth-level figures and the scenarios use EVM votes.</li>
+    <li>Each booth's area (village, town panchayat or Dharapuram town) comes from the polling-station list in the electoral roll.</li>
+    <li>Scenarios assume everyone else votes as in April and turnout does not change. In DMK's math, NTK, independents and NOTA hold about 4%, and DMK's extra votes come from them or from new voters.</li>
+    <li>The "two battles" charts show a pattern across booths in one election. They do not show individual voters moving between parties.</li>
+  </ul>
+</section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  // [booth_no, area (V village, P town panchayat, T town), winner (a/d/t/x tie), AIADMK %, DMK %, TVK %, DMK rank (0 = tied first)]
+  const BOOTHS = [[1,"V","a",54.3,21.9,19.5,2],[2,"V","a",51.6,28.1,16.9,2],[3,"V","a",54.7,18.8,22.7,3],[4,"V","a",51.6,20.0,24.9,3],[5,"V","a",55.2,21.5,20.5,2],[6,"V","a",45.1,27.5,24.6,2],[7,"V","a",60.8,20.1,15.5,2],[8,"V","a",47.2,28.2,20.2,2],[9,"V","a",51.2,28.8,17.1,2],[10,"V","a",39.9,32.0,23.8,2],[11,"V","a",36.3,33.7,26.4,2],[12,"V","a",46.4,33.2,17.5,2],[13,"V","a",57.6,29.5,10.1,2],[14,"V","a",53.6,20.1,22.4,3],[15,"P","a",52.1,27.9,16.8,2],[16,"P","a",67.5,17.6,11.2,2],[17,"P","a",41.9,25.4,30.1,3],[18,"P","a",51.9,24.6,21.9,2],[19,"P","a",43.2,34.0,20.1,2],[20,"P","a",38.6,34.0,22.3,2],[21,"P","a",48.4,26.9,21.7,2],[22,"P","a",45.1,30.9,19.6,2],[23,"V","a",46.4,26.8,22.6,2],[24,"V","a",36.0,29.1,30.0,3],[25,"V","a",42.7,38.1,14.7,2],[26,"V","a",39.5,38.2,18.4,2],[27,"V","a",55.8,25.0,15.1,2],[28,"V","a",60.2,19.6,16.2,2],[29,"V","a",54.9,23.0,19.1,2],[30,"V","a",48.2,29.5,19.5,2],[31,"V","a",45.7,21.7,29.1,3],[32,"V","a",49.0,28.0,19.8,2],[33,"V","a",50.6,21.1,25.6,3],[34,"V","a",39.3,32.7,24.7,2],[35,"V","a",50.0,26.8,18.5,2],[36,"V","a",45.0,28.8,24.2,2],[37,"V","a",45.2,26.0,24.2,2],[38,"V","a",50.3,33.2,11.8,2],[39,"V","a",48.9,27.7,21.9,2],[40,"V","a",55.4,27.6,14.1,2],[41,"V","a",45.1,29.6,21.2,2],[42,"V","a",60.4,22.7,14.3,2],[43,"V","a",55.5,21.5,19.9,2],[44,"V","a",54.9,28.6,13.4,2],[45,"V","a",62.6,23.1,11.5,2],[46,"V","a",46.4,27.7,21.9,2],[47,"V","a",57.1,26.7,11.3,2],[48,"V","a",52.7,32.8,11.6,2],[49,"V","a",52.0,35.4,10.0,2],[50,"V","a",58.1,24.3,13.1,2],[51,"V","d",32.7,42.4,22.6,1],[52,"V","a",46.8,31.0,17.8,2],[53,"V","a",37.7,27.5,29.3,3],[54,"V","a",36.6,32.0,26.9,2],[55,"V","a",54.3,21.8,16.3,2],[56,"P","a",44.1,37.3,15.3,2],[57,"P","a",48.2,31.9,15.9,2],[58,"P","a",58.0,12.5,25.0,3],[59,"P","a",41.2,32.5,22.9,2],[60,"P","a",38.0,32.3,24.5,2],[61,"P","a",50.2,27.5,17.7,2],[62,"P","d",33.3,38.1,25.1,1],[63,"P","a",39.4,33.2,24.1,2],[64,"P","d",37.1,38.6,21.6,1],[65,"P","a",38.3,35.7,20.5,2],[66,"V","a",52.5,24.5,19.2,2],[67,"V","a",41.4,23.9,27.6,3],[68,"P","d",36.6,37.0,24.0,1],[69,"P","d",36.1,40.9,18.9,1],[70,"V","a",45.9,34.1,18.3,2],[71,"V","d",30.3,39.9,26.6,1],[72,"V","a",54.0,26.8,15.6,2],[73,"V","a",46.6,34.4,16.8,2],[74,"V","a",44.9,32.5,19.0,2],[75,"V","a",44.0,34.5,18.0,2],[76,"V","a",49.3,28.1,18.9,2],[77,"V","a",40.5,33.0,22.0,2],[78,"V","a",37.7,35.5,23.3,2],[79,"V","a",49.3,28.4,17.3,2],[80,"V","a",53.0,21.2,21.7,3],[81,"V","a",47.6,30.4,18.1,2],[82,"V","a",52.8,32.9,12.7,2],[83,"V","a",40.9,34.6,20.9,2],[84,"V","a",50.6,27.7,17.5,2],[85,"V","a",68.5,18.9,9.1,2],[86,"V","a",51.1,29.0,16.8,2],[87,"V","a",60.9,21.8,14.7,2],[88,"V","a",45.5,32.2,20.4,2],[89,"V","a",39.0,35.1,21.9,2],[90,"V","a",43.3,25.8,26.0,3],[91,"V","a",56.7,20.1,18.9,2],[92,"V","a",50.6,27.9,16.7,2],[93,"V","a",50.9,29.4,13.5,2],[94,"V","a",42.6,27.6,23.6,2],[95,"V","a",52.5,24.6,17.2,2],[96,"V","a",54.4,29.9,12.5,2],[97,"V","a",49.1,30.3,15.9,2],[98,"V","d",35.4,42.4,15.2,1],[99,"V","a",60.0,17.2,17.4,3],[100,"V","a",59.0,22.1,14.5,2],[101,"V","a",42.7,29.8,19.5,2],[102,"V","a",47.1,21.8,26.3,3],[103,"V","a",56.8,19.1,21.3,3],[104,"V","a",45.5,31.2,21.8,2],[105,"V","d",27.0,36.9,30.4,1],[106,"V","d",29.2,38.7,27.6,1],[107,"V","a",35.4,34.2,27.9,2],[108,"V","a",50.4,31.4,15.0,2],[109,"V","a",54.1,19.9,15.0,2],[110,"V","a",51.1,24.1,18.7,2],[111,"V","a",51.9,26.5,17.4,2],[112,"V","a",47.2,31.8,19.0,2],[113,"V","a",51.1,25.6,20.0,2],[114,"V","a",45.2,31.0,19.0,2],[115,"V","a",49.8,37.7,10.2,2],[116,"V","a",46.0,29.5,21.1,2],[117,"V","a",60.6,19.6,15.3,2],[118,"V","a",46.8,31.9,14.4,2],[119,"V","a",36.2,36.1,24.1,2],[120,"V","t",29.6,29.6,33.3,2],[121,"V","a",44.0,26.3,26.4,3],[122,"V","a",39.0,25.8,31.6,3],[123,"V","a",59.9,19.0,17.0,2],[124,"V","t",33.5,25.6,35.8,3],[125,"V","a",38.6,29.8,27.0,2],[126,"V","d",29.2,37.8,27.3,1],[127,"V","t",29.1,32.8,34.2,2],[128,"V","a",51.5,20.9,24.0,3],[129,"V","a",33.8,30.2,30.0,2],[130,"V","a",38.4,30.1,26.9,2],[131,"V","a",33.4,32.6,29.2,2],[132,"V","a",46.9,21.2,27.1,3],[133,"V","a",43.0,31.4,21.5,2],[134,"T","a",37.4,21.7,36.7,3],[135,"T","d",14.6,56.2,26.3,1],[136,"T","d",27.8,36.2,34.1,1],[137,"T","d",16.9,55.8,25.3,1],[138,"T","a",36.5,32.1,25.3,2],[139,"T","d",34.8,37.0,25.6,1],[140,"T","a",42.2,23.3,31.1,3],[141,"T","t",33.1,26.8,36.7,3],[142,"T","d",23.3,37.3,37.1,1],[143,"T","t",33.9,23.1,39.1,3],[144,"T","t",28.4,31.7,36.3,2],[145,"T","d",3.4,76.9,17.6,1],[146,"T","d",7.3,73.0,18.2,1],[147,"T","d",6.6,73.2,17.6,1],[148,"T","d",4.3,81.5,12.1,1],[149,"T","t",33.3,29.5,34.2,3],[150,"T","t",21.4,37.9,39.3,2],[151,"T","d",22.9,37.1,35.1,1],[152,"T","t",10.5,41.9,42.9,2],[153,"T","t",19.7,35.1,39.2,2],[154,"T","d",23.5,38.4,33.6,1],[155,"T","d",16.0,46.6,31.0,1],[156,"T","d",16.2,42.6,35.3,1],[157,"T","t",18.4,35.8,40.9,2],[158,"T","t",24.2,32.5,37.2,2],[159,"T","t",27.1,32.1,34.8,2],[160,"T","d",24.9,40.5,31.9,1],[161,"T","d",20.6,55.0,22.1,1],[162,"T","d",25.1,45.0,27.4,1],[163,"T","t",26.6,32.2,36.8,2],[164,"T","t",31.8,32.0,32.8,2],[165,"T","d",23.9,41.7,30.3,1],[166,"T","d",28.8,35.9,29.2,1],[167,"T","d",26.2,39.5,30.4,1],[168,"T","d",24.2,37.9,35.1,1],[169,"T","a",32.3,31.5,31.8,3],[170,"T","a",39.8,27.6,27.6,2],[171,"T","d",22.9,40.0,33.2,1],[172,"T","d",21.7,47.2,26.6,1],[173,"T","d",3.4,76.2,19.5,1],[174,"T","d",23.8,47.0,26.5,1],[175,"T","t",25.2,34.5,36.2,2],[176,"T","t",17.7,26.2,51.2,2],[177,"T","t",18.5,38.6,40.0,2],[178,"T","d",27.2,37.7,33.0,1],[179,"T","t",25.9,29.1,40.2,2],[180,"T","t",17.0,39.1,39.6,2],[181,"T","d",30.3,33.4,32.2,1],[182,"T","t",19.0,32.8,44.1,2],[183,"T","d",26.9,35.1,33.5,1],[184,"T","d",25.3,35.5,32.8,1],[185,"T","a",38.0,37.8,19.1,2],[186,"T","t",29.0,22.3,43.6,3],[187,"T","t",25.7,27.8,43.0,2],[188,"T","d",25.6,45.3,25.6,1],[189,"T","a",34.4,33.3,29.2,2],[190,"T","t",26.1,25.8,43.7,3],[191,"T","t",28.1,31.1,35.3,2],[192,"T","t",15.3,31.5,50.9,2],[193,"T","t",26.2,30.8,38.9,2],[194,"P","a",40.0,31.6,25.2,2],[195,"P","t",26.0,33.5,36.9,2],[196,"P","d",19.3,51.9,25.8,1],[197,"P","d",22.6,39.6,33.9,1],[198,"P","d",21.6,41.3,33.1,1],[199,"P","d",29.4,37.2,27.0,1],[200,"P","d",36.9,39.0,19.3,1],[201,"P","a",39.0,29.2,25.3,2],[202,"P","a",49.4,33.8,12.8,2],[203,"P","a",44.5,36.2,15.6,2],[204,"P","a",60.1,26.3,12.0,2],[205,"P","d",20.1,40.9,32.2,1],[206,"P","a",53.5,20.8,20.6,2],[207,"P","t",35.2,23.0,38.6,3],[208,"P","a",37.6,27.9,30.2,3],[209,"V","a",38.7,29.2,27.2,2],[210,"V","d",26.8,37.8,32.6,1],[211,"V","a",48.4,23.3,24.3,3],[212,"V","a",58.2,18.5,16.3,2],[213,"V","d",34.6,38.0,24.5,1],[214,"V","a",47.8,29.5,19.2,2],[215,"V","a",35.3,33.8,27.3,2],[216,"V","a",37.3,30.0,27.6,2],[217,"V","d",34.0,37.4,22.5,1],[218,"V","d",34.3,38.1,24.2,1],[219,"V","d",25.7,38.4,30.9,1],[220,"V","d",27.3,39.8,26.9,1],[221,"V","a",43.6,35.6,16.7,2],[222,"V","d",26.3,37.4,32.0,1],[223,"V","d",29.1,41.4,25.2,1],[224,"V","d",34.1,34.2,27.5,1],[225,"V","d",16.2,59.3,22.4,1],[226,"V","d",19.1,51.3,26.7,1],[227,"V","d",32.3,42.2,22.0,1],[228,"V","d",32.0,38.9,25.5,1],[229,"V","d",25.8,39.6,29.2,1],[230,"V","a",43.2,33.7,19.0,2],[231,"V","a",47.4,28.0,21.3,2],[232,"V","a",38.2,36.5,21.9,2],[233,"V","a",60.8,24.7,12.5,2],[234,"V","a",49.6,25.6,20.4,2],[235,"V","a",43.9,36.6,16.6,2],[236,"V","a",36.3,33.6,20.6,2],[237,"V","d",39.0,39.1,18.2,1],[238,"V","a",42.9,36.1,18.1,2],[239,"V","a",41.6,30.6,23.4,2],[240,"V","a",42.3,31.8,21.8,2],[241,"V","a",44.0,24.2,28.4,3],[242,"V","a",45.3,29.1,21.6,2],[243,"V","a",48.4,24.9,19.5,2],[244,"V","a",45.3,28.0,24.9,2],[245,"P","a",56.5,27.4,12.0,2],[246,"P","a",39.8,20.3,35.3,3],[247,"P","a",42.5,32.9,20.6,2],[248,"P","a",57.5,24.0,14.9,2],[249,"V","a",52.4,27.7,16.5,2],[250,"V","a",41.9,34.3,21.5,2],[251,"V","a",43.1,32.6,21.1,2],[252,"V","a",52.1,26.5,17.5,2],[253,"V","a",45.1,30.5,19.6,2],[254,"V","a",51.4,25.1,18.7,2],[255,"V","a",46.9,32.4,16.5,2],[256,"V","a",54.2,27.7,12.5,2],[257,"V","d",39.5,42.1,14.3,1],[258,"V","a",48.7,36.3,12.5,2],[259,"V","d",38.5,41.6,17.2,1],[260,"P","a",50.2,33.3,13.5,2],[261,"P","a",55.2,25.0,16.0,2],[262,"P","a",39.6,33.5,21.8,2],[263,"P","a",47.5,31.3,18.0,2],[264,"P","a",48.7,27.5,20.4,2],[265,"V","d",35.7,35.8,25.0,1],[266,"P","a",48.6,23.5,24.6,3],[267,"P","d",35.7,36.0,25.9,1],[268,"P","a",46.8,28.3,20.5,2],[269,"P","a",34.0,30.8,32.1,3],[270,"P","d",29.9,35.1,31.5,1],[271,"P","a",34.8,32.1,28.9,2],[272,"P","t",26.3,32.1,34.9,2],[273,"P","a",34.8,27.3,33.4,3],[274,"P","t",29.9,25.9,40.3,3],[275,"P","x",37.0,37.0,19.2,0],[276,"V","a",45.5,35.8,16.8,2],[277,"V","a",46.6,35.4,15.1,2],[278,"V","a",40.1,34.3,24.1,2],[279,"V","d",41.1,41.8,13.6,1],[280,"V","a",50.3,28.8,18.1,2],[281,"V","a",36.0,27.8,30.0,3],[282,"V","a",45.4,30.7,22.2,2],[283,"V","a",54.0,22.8,19.6,2],[284,"V","a",45.7,33.0,15.4,2],[285,"P","a",44.3,34.9,15.3,2],[286,"V","a",45.1,30.7,21.9,2],[287,"V","a",53.8,29.1,14.4,2],[288,"P","a",49.7,26.2,20.9,2],[289,"P","a",42.2,39.4,16.3,2],[290,"P","a",35.7,33.9,26.4,2],[291,"V","a",44.4,32.3,20.0,2],[292,"V","a",39.2,34.4,23.6,2],[293,"V","a",42.2,29.6,22.9,2],[294,"V","a",49.9,29.7,17.6,2],[295,"V","a",44.9,30.7,20.3,2],[296,"V","a",42.7,30.0,24.0,2],[297,"V","a",48.6,20.2,26.8,3],[298,"V","a",45.9,33.1,17.3,2],[299,"V","a",48.1,25.3,21.8,2],[300,"V","a",40.5,32.6,20.2,2],[301,"P","a",37.4,36.2,21.1,2],[302,"P","a",42.8,37.4,16.0,2],[303,"P","a",43.4,36.9,14.9,2],[304,"V","a",42.7,34.0,16.2,2],[305,"V","a",50.1,27.6,17.4,2],[306,"V","a",44.4,31.5,16.3,2],[307,"V","a",49.6,23.7,22.3,2],[308,"V","a",48.7,20.2,27.4,3],[309,"V","d",41.7,45.0,11.6,1],[310,"V","a",57.3,29.2,11.3,2],[311,"V","a",55.5,28.5,12.1,2],[312,"V","a",42.8,27.5,26.0,2],[313,"V","a",50.4,32.5,11.7,2],[314,"V","a",51.6,31.7,12.7,2],[315,"V","a",49.9,25.6,19.4,2],[316,"V","a",45.3,41.3,10.9,2],[317,"V","a",54.9,26.9,14.2,2],[318,"V","a",43.7,36.8,16.2,2],[319,"V","a",39.7,35.5,20.5,2],[320,"V","a",49.7,27.3,19.4,2]];
+  const RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const DUR = RM ? 0 : 750;
+  const PC = { a: "var(--aiadmk)", d: "var(--dmk)", t: "var(--tvk)", x: "var(--tie)", o: "var(--others)" };
+  const PN = { a: "AIADMK", d: "DMK", t: "TVK", x: "Tie" };
+  const fmt = d3.format(",");
+  const narrow = () => window.innerWidth <= 860;
+
+  // ---------- generic figure ----------
+  function makeFig(id) {
+    const el = document.getElementById(id);
+    const svg = d3.select(el).append("svg");
+    const fig = { el, svg, w: 0, h: 0, scene: null, busyUntil: 0 };
+    fig.measure = function () {
+      const r = el.getBoundingClientRect();
+      fig.w = Math.max(280, Math.round(r.width));
+      fig.h = Math.max(260, Math.round(r.height));
+      svg.attr("viewBox", "0 0 " + fig.w + " " + fig.h);
+    };
+    fig.measure();
+    return fig;
+  }
+  function show(sel, on, dur) {
+    sel.style("pointer-events", on ? null : "none");
+    (dur ? sel.transition().duration(dur) : sel).style("opacity", on ? 1 : 0);
+  }
+  function wrapText(textSel, str, width, lineH) {
+    const words = str.split(" "); let line = []; let tspan = textSel.text(null).append("tspan").attr("x", textSel.attr("x")).attr("dy", 0);
+    let n = 0;
+    words.forEach(function (w) {
+      line.push(w); tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width && line.length > 1) {
+        line.pop(); tspan.text(line.join(" ")); line = [w]; n++;
+        tspan = textSel.append("tspan").attr("x", textSel.attr("x")).attr("dy", lineH).text(w);
+      }
+    });
+    return n + 1;
+  }
+
+  // ---------- shared: unit (booth) chart ----------
+  const ORDER = { a: 0, d: 1, t: 2, x: 3 };
+  function unitSize(w, h, top, bottom) {
+    const availW = w - 8, availH = h - top - bottom;
+    const sGrid = Math.min(availW / 20, availH / 16);
+    const sClu = Math.min(availW / 28, (availH - 46) / 15);
+    return Math.max(6, Math.floor(Math.min(sGrid, sClu) * 10) / 10);
+  }
+  function gridPositions(w, top, s) {
+    const x0 = (w - 20 * s) / 2; const pos = {};
+    BOOTHS.slice().sort(function (p, q) { return p[0] - q[0]; }).forEach(function (b, i) {
+      pos[b[0]] = { x: x0 + (i % 20) * s, y: top + Math.floor(i / 20) * s };
+    });
+    return { pos: pos, x0: x0, width: 20 * s };
+  }
+  const CLUSTERS = [
+    { key: "V", name: "Villages", cols: 14 },
+    { key: "P", name: "Town panchayats", cols: 5 },
+    { key: "T", name: "Dharapuram town", cols: 5 }
+  ];
+  function clusterPositions(w, top, s) {
+    const x0 = (w - 28 * s) / 2; const pos = {}; const boxes = []; let cx = x0;
+    CLUSTERS.forEach(function (c) {
+      const list = BOOTHS.filter(function (b) { return b[1] === c.key; })
+        .sort(function (p, q) { return (ORDER[p[2]] - ORDER[q[2]]) || (p[0] - q[0]); });
+      list.forEach(function (b, i) { pos[b[0]] = { x: cx + (i % c.cols) * s, y: top + 46 + Math.floor(i / c.cols) * s }; });
+      boxes.push({ key: c.key, name: c.name, x: cx, n: list.length, width: c.cols * s });
+      cx += c.cols * s + 2 * s;
+    });
+    return { pos: pos, boxes: boxes };
+  }
+  function drawUnits(g, positions, s, fillFn, opacityFn, dur) {
+    const sel = g.selectAll("rect.unit").data(BOOTHS, function (b) { return b[0]; });
+    const ent = sel.enter().append("rect").attr("class", "unit")
+      .attr("x", function (b) { return positions[b[0]].x; }).attr("y", function (b) { return positions[b[0]].y; });
+    const all = ent.merge(sel)
+      .attr("width", s * 0.84).attr("height", s * 0.84).attr("rx", Math.max(1, s * 0.18))
+      .style("fill", fillFn).style("opacity", opacityFn);
+    (dur ? all.transition().duration(dur).delay(function (b, i) { return RM ? 0 : (i % 40) * 4; }) : all)
+      .attr("x", function (b) { return positions[b[0]].x; }).attr("y", function (b) { return positions[b[0]].y; });
+  }
+  function legendRow(g, items, x, y, maxW) {
+    g.selectAll("*").remove();
+    let cx = x, cy = y;
+    items.forEach(function (it) {
+      const item = g.append("g");
+      item.append("rect").attr("width", 11).attr("height", 11).attr("rx", 2.5).attr("y", -9).style("fill", it.color);
+      const t = item.append("text").attr("x", 16).attr("y", 0).text(it.label);
+      const wItem = 16 + t.node().getComputedTextLength() + 16;
+      if (cx + wItem - x > maxW && cx > x) { cx = x; cy += 18; }
+      item.attr("transform", "translate(" + cx + "," + cy + ")");
+      cx += wItem;
+    });
+    return cy - y + 18;
+  }
+  function figHeader(g, w, title, sub) {
+    g.selectAll("*").remove();
+    const t = g.append("text").attr("class", "t-title").attr("x", 4).attr("y", 18);
+    const n = wrapText(t, title, w - 8, 18);
+    if (sub) {
+      const s = g.append("text").attr("class", "t-sub").attr("x", 4).attr("y", 18 + n * 18 + 2);
+      const m = wrapText(s, sub, w - 8, 14);
+      return 18 + n * 18 + m * 14 + 6;
+    }
+    return 18 + n * 18 + 4;
+  }
+
+  // ======================= Block: April =======================
+  function blockApril() {
+    const fig = makeFig("fig-april");
+    const svg = fig.svg;
+    const gHead = svg.append("g");
+    const gBars = svg.append("g").attr("class", "layer");
+    const gLegend = svg.append("g").attr("class", "layer");
+    const gUnits = svg.append("g");
+    const gClu = svg.append("g").attr("class", "layer");
+    const gMarg = svg.append("g").attr("class", "layer");
+    const RESULT = [
+      { k: "a", name: "AIADMK", pct: 40.6, votes: 81100 },
+      { k: "d", name: "DMK", pct: 32.2, votes: 64373 },
+      { k: "t", name: "TVK", pct: 23.2, votes: 46438 },
+      { k: "o", name: "Others", pct: 4.0, votes: 8033 }
+    ];
+    const MARG = [
+      { name: "Villages", v: 18663 },
+      { name: "Town panchayats", v: 3747 },
+      { name: "Dharapuram town", v: -5498 }
+    ];
+    const counts = d3.rollup(BOOTHS, function (v) { return v.length; }, function (b) { return b[2]; });
+
+    function render(scene, animate) {
+      fig.measure();
+      const w = fig.w, h = fig.h, dur = animate ? DUR : 0;
+      const isUnits = ["grid", "villages", "panchayats", "town"].indexOf(scene) >= 0;
+      let head;
+      if (scene === "result") head = figHeader(gHead, w, "April 2026 result", "Share of all votes, EVM and postal");
+      else if (scene === "grid") head = figHeader(gHead, w, "Every booth, coloured by who won it", "Each square is one polling booth, in booth-number order");
+      else if (isUnits) head = figHeader(gHead, w, "The same booths, sorted by area", "Each square is one booth, coloured by who won it");
+      else head = figHeader(gHead, w, "Where AIADMK built its lead", "AIADMK's lead over DMK in each area, EVM votes");
+
+      // --- result bars
+      show(gBars, scene === "result", dur);
+      if (scene === "result") {
+        gBars.selectAll("*").remove();
+        const top = head + 24, rowH = Math.min(64, (h - top - 20) / 4);
+        const labelW = 74, valW = narrow() ? 92 : 120;
+        const x = d3.scaleLinear([0, 45], [0, w - labelW - valW - 8]);
+        RESULT.forEach(function (r, i) {
+          const y = top + i * rowH;
+          gBars.append("text").attr("x", 4).attr("y", y + rowH * 0.42 + 4).attr("class", r.k === "o" ? "" : "t-strong").text(r.name);
+          const bar = gBars.append("rect").attr("x", labelW).attr("y", y + rowH * 0.12).attr("height", rowH * 0.6).attr("rx", 3)
+            .style("fill", PC[r.k]).attr("width", dur ? 0 : x(r.pct));
+          if (dur) bar.transition().duration(dur).delay(i * 90).attr("width", x(r.pct));
+          gBars.append("text").attr("x", labelW + x(r.pct) + 8).attr("y", y + rowH * 0.42).attr("class", "t-strong").text(r.pct.toFixed(1) + "%");
+          gBars.append("text").attr("x", labelW + x(r.pct) + 8).attr("y", y + rowH * 0.42 + 14).attr("class", "t-sub").text(fmt(r.votes) + " votes");
+        });
+        gBars.append("text").attr("class", "t-sub").attr("x", 4).attr("y", top + 4 * rowH + 8)
+          .text("DMK + TVK = 55.4%. Others: NTK, independents, NOTA.");
+      }
+
+      // --- units
+      const legendH = 22;
+      const s = unitSize(w, h, head + legendH + 10, 10);
+      const unitTop = head + legendH + 10;
+      show(gLegend, isUnits, dur);
+      if (isUnits) {
+        legendRow(gLegend, [
+          { color: PC.a, label: "AIADMK " + counts.get("a") },
+          { color: PC.d, label: "DMK " + counts.get("d") },
+          { color: PC.t, label: "TVK " + counts.get("t") },
+          { color: PC.x, label: "Tie " + (counts.get("x") || 0) }
+        ], 4, head + 12, w - 8);
+      }
+      let positions;
+      if (scene === "grid" || scene === "result") positions = gridPositions(w, unitTop, s).pos;
+      else positions = clusterPositions(w, unitTop, s).pos;
+      const focus = { villages: "V", panchayats: "P", town: "T" }[scene];
+      drawUnits(gUnits, positions, s,
+        function (b) { return PC[b[2]]; },
+        function (b) { return !isUnits ? 0 : (focus && b[1] !== focus ? 0.16 : 1); },
+        (scene === "result" || scene === "margins") ? 0 : dur);
+
+      // cluster labels
+      show(gClu, isUnits && scene !== "grid", dur);
+      gClu.selectAll("*").remove();
+      if (isUnits && scene !== "grid") {
+        clusterPositions(w, unitTop, s).boxes.forEach(function (bx) {
+          const on = !focus || bx.key === focus;
+          const t = gClu.append("text").attr("x", bx.x).attr("y", unitTop + 14).attr("class", on ? "t-strong" : "t-sub");
+          wrapText(t, bx.name, Math.max(bx.width, 54), 13);
+          gClu.append("text").attr("x", bx.x).attr("y", unitTop + 40).attr("class", "t-sub").text(bx.n + " booths");
+        });
+      }
+
+      // --- margins
+      show(gMarg, scene === "margins", dur);
+      if (scene === "margins") {
+        gMarg.selectAll("*").remove();
+        const top = head + 30, rowH = Math.min(78, (h - top - 70) / 3);
+        const x = d3.scaleLinear([-8000, 20000], [8, w - 8]);
+        gMarg.append("line").attr("x1", x(0)).attr("x2", x(0)).attr("y1", top - 12).attr("y2", top + rowH * 3).style("stroke", "var(--ink-2)");
+        gMarg.append("text").attr("x", x(0) + 6).attr("y", top - 16).attr("class", "t-sub").text("AIADMK ahead →");
+        gMarg.append("text").attr("x", x(0) - 6).attr("y", top - 16).attr("text-anchor", "end").attr("class", "t-sub").text("← DMK");
+        MARG.forEach(function (m, i) {
+          const y = top + i * rowH;
+          const bh = Math.min(30, rowH * 0.4);
+          const x0 = x(Math.min(0, m.v)), wd = Math.abs(x(m.v) - x(0));
+          gMarg.append("text").attr("class", "t-strong").attr("x", 4).attr("y", y + 12).text(m.name);
+          const bar = gMarg.append("rect").attr("y", y + 20).attr("height", bh).attr("rx", 3)
+            .style("fill", m.v > 0 ? PC.a : PC.d)
+            .attr("x", dur ? x(0) : x0).attr("width", dur ? 0 : wd);
+          if (dur) bar.transition().duration(dur).delay(i * 120).attr("x", x0).attr("width", wd);
+          const lab = m.v > 0 ? "AIADMK +" + fmt(m.v) : "DMK +" + fmt(-m.v);
+          const ly = y + 20 + bh / 2 + 4;
+          if (m.v < 0) gMarg.append("text").attr("x", x(0) + 8).attr("y", ly).text(lab);
+          else if (x(m.v) + 120 > w) gMarg.append("text").attr("x", x(m.v) - 8).attr("text-anchor", "end").attr("class", "t-on").attr("y", ly).text(lab);
+          else gMarg.append("text").attr("x", x(m.v) + 8).attr("y", ly).text(lab);
+        });
+        const ny = top + 3 * rowH + 14;
+        gMarg.append("line").attr("x1", 8).attr("x2", w - 8).attr("y1", ny - 2).attr("y2", ny - 2).style("stroke", "var(--rule)");
+        gMarg.append("text").attr("class", "t-strong").attr("x", 4).attr("y", ny + 16).text("Overall: AIADMK +16,912 EVM votes");
+        gMarg.append("text").attr("class", "t-sub").attr("x", 4).attr("y", ny + 32).text("With postal votes, the official margin was 16,727.");
+      }
+      fig.scene = scene;
+    }
+    return { fig: fig, render: render, initial: "result" };
+  }
+
+  // ======================= Block: Two battles =======================
+  function blockBattles() {
+    const fig = makeFig("fig-battles");
+    const svg = fig.svg;
+    const gHead = svg.append("g");
+    const gPlot = svg.append("g");
+    const DATA = {
+      villages: { title: "Village booths, grouped from TVK's weakest to its strongest", sub: "5 groups of about 40 booths. Average vote share in each group.",
+        a: [52.8, 48.9, 47.7, 41.5, 36.1], d: [30.3, 29.8, 28.2, 31.7, 30.8], t: [13.1, 17.2, 20.1, 23.3, 28.6] },
+      town: { title: "Town booths, grouped from TVK's weakest to its strongest", sub: "3 groups of 20 booths. Average vote share in each group.",
+        a: [21.8, 26.8, 23.4], d: [50.9, 35.3, 31.4], t: [24.1, 33.7, 41.1] }
+    };
+    const played = {};
+    function render(scene, animate) {
+      fig.measure();
+      const replay = animate && fig.scene === scene;      // first visit to the chart already on screen
+      const w = fig.w, h = fig.h, dur = animate && !replay ? DUR : 0;
+      const DRAW = animate && !RM ? 1800 : 0;             // how long the lines take to draw
+      const start = dur ? dur / 2 : 0;
+      if (animate) played[scene] = true;
+      if (DRAW) fig.busyUntil = performance.now() + start + DRAW + 500;
+      const D = DATA[scene];
+      const head = figHeader(gHead, w, D.title, D.sub);
+      const m = { t: head + 18, r: narrow() ? 92 : 112, b: 44, l: 40 };
+      const n = D.a.length;
+      const x = d3.scalePoint(d3.range(n), [m.l + 8, w - m.r]);
+      const y = d3.scaleLinear([0, 60], [h - m.b, m.t]);
+      const old = gPlot.selectAll("g.plot");
+      old.interrupt().selectAll("*").interrupt();
+      if (dur) old.transition().duration(dur / 2).style("opacity", 0).remove(); else old.remove();
+      const g = gPlot.append("g").attr("class", "plot").style("opacity", dur ? 0 : 1);
+      if (dur) g.transition().delay(dur / 2).duration(dur / 2).style("opacity", 1);
+      const grid = g.append("g").attr("class", "grid");
+      [0, 20, 40, 60].forEach(function (v) {
+        grid.append("line").attr("x1", m.l).attr("x2", w - m.r + 8).attr("y1", y(v)).attr("y2", y(v));
+        g.append("text").attr("x", m.l - 8).attr("y", y(v) + 4).attr("text-anchor", "end").attr("class", "t-sub").text(v + "%");
+      });
+      const line = d3.line().x(function (d, i) { return x(i); }).y(function (d) { return y(d); });
+      ["d", "a", "t"].forEach(function (k) {
+        const focus = (scene === "villages" && (k === "a" || k === "t")) || (scene === "town" && (k === "d" || k === "t"));
+        const path = g.append("path").datum(D[k]).attr("d", line).style("fill", "none").style("stroke", PC[k])
+          .style("stroke-width", focus ? 3 : 2).style("stroke-linecap", "round").style("opacity", focus ? 1 : 0.55);
+        // when does the drawing line reach each point? (by length along the line)
+        const pts = D[k].map(function (d, i) { return [x(i), y(d)]; });
+        const seg = [0];
+        for (let i = 1; i < pts.length; i++) seg.push(seg[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+        const total = seg[seg.length - 1] || 1;
+        const dots = g.selectAll(null).data(D[k]).enter().append("circle").attr("cx", function (d, i) { return x(i); }).attr("cy", function (d) { return y(d); })
+          .attr("r", DRAW ? 0 : 4.5).style("fill", PC[k]).style("stroke", "var(--bg)").style("stroke-width", 2).style("opacity", focus ? 1 : 0.55);
+        const last = D[k][n - 1];
+        const lab = g.append("text").attr("x", x(n - 1) + 10).attr("y", y(last) + 4).attr("class", focus ? "t-strong" : "")
+          .text(PN[k] + " " + Math.round(last) + "%").style("opacity", DRAW ? 0 : 1);
+        if (DRAW) {
+          const L = path.node().getTotalLength();
+          path.attr("stroke-dasharray", L + " " + L).attr("stroke-dashoffset", L)
+            .transition().delay(start).duration(DRAW).ease(d3.easeLinear).attr("stroke-dashoffset", 0)
+            .on("end", function () { d3.select(this).attr("stroke-dasharray", null); });
+          dots.transition().delay(function (d, i) { return start + DRAW * seg[i] / total; }).duration(220).attr("r", 4.5);
+          lab.transition().delay(start + DRAW).duration(400).style("opacity", 1);
+        }
+      });
+      // nudge overlapping end labels
+      const labels = g.selectAll("text").filter(function () { return +d3.select(this).attr("x") > x(n - 1); }).nodes();
+      function nudge(nodes) {
+        nodes.sort(function (p, q) { return +p.getAttribute("y") - +q.getAttribute("y"); });
+        for (let i = 1; i < nodes.length; i++) {
+          const prev = +nodes[i - 1].getAttribute("y"), cur = +nodes[i].getAttribute("y");
+          if (cur - prev < 15) nodes[i].setAttribute("y", prev + 15);
+        }
+      }
+      nudge(labels);
+
+      g.append("text").attr("x", x(0)).attr("y", h - m.b + 22).attr("class", "t-sub").attr("text-anchor", "start").text("← weakest TVK booths");
+      g.append("text").attr("x", x(n - 1)).attr("y", h - m.b + 22).attr("class", "t-sub").attr("text-anchor", "end").text("strongest →");
+      fig.scene = scene;
+    }
+    return { fig: fig, render: render, initial: "villages", needsPlay: function (scene) { return !played[scene]; } };
+  }
+
+  // ---------- shared: allies ----------
+  const CHIPS = [
+    { id: "DMK", apr: 0, oct: 0, cls: "anchor-dmk" },
+    { id: "Congress", apr: 0, oct: 1 }, { id: "VCK", apr: 0, oct: 1 }, { id: "IUML", apr: 0, oct: 1 }, { id: "MDMK", apr: 0, oct: 1 },
+    { id: "CPI", apr: 0, oct: 2 }, { id: "CPI(M)", apr: 0, oct: 2 },
+    { id: "TVK", apr: 1, oct: 1, cls: "anchor-tvk" }
+  ];
+  function drawAllies(g, w, top, h, state, dur) {
+    g.selectAll("*").remove();
+    const gap = 10, cw = (w - 8 - 2 * gap) / 3;
+    const cols = [["With DMK"], ["With the TVK", "government"], ["Going alone"]];
+    cols.forEach(function (c, i) {
+      const t = g.append("text").attr("x", 4 + i * (cw + gap)).attr("y", top + 14).attr("class", "t-strong");
+      c.forEach(function (ln, j) { t.append("tspan").attr("x", 4 + i * (cw + gap)).attr("dy", j ? 14 : 0).text(ln); });
+      g.append("line").attr("x1", 4 + i * (cw + gap)).attr("x2", 4 + i * (cw + gap) + cw).attr("y1", top + 40).attr("y2", top + 40).style("stroke", "var(--rule)");
+    });
+    const chipH = Math.min(34, (h - top - 70) / 7), chipGap = Math.min(8, chipH * 0.25);
+    function layout(key) {
+      const slot = [0, 0, 0], pos = {};
+      CHIPS.forEach(function (c) {
+        const col = c[key];
+        pos[c.id] = { x: 4 + col * (cw + gap), y: top + 52 + slot[col] * (chipH + chipGap) };
+        slot[col]++;
+      });
+      return pos;
+    }
+    const from = layout(state === "move" ? "apr" : "oct"), to = layout("oct");
+    const chips = g.selectAll("g.chip").data(CHIPS).enter().append("g").attr("class", function (c) { return "chip " + (c.cls || ""); })
+      .attr("transform", function (c) { return "translate(" + from[c.id].x + "," + from[c.id].y + ")"; });
+    chips.append("rect").attr("width", cw).attr("height", chipH).attr("rx", chipH / 2);
+    chips.append("text").attr("x", 12).attr("y", chipH / 2 + 4).text(function (c) { return c.id; });
+    if (state === "move") {
+      (dur ? chips.transition().delay(function (c, i) { return 500 + i * 70; }).duration(dur) : chips)
+        .attr("transform", function (c) { return "translate(" + to[c.id].x + "," + to[c.id].y + ")"; });
+    }
+    const yr = g.append("text").attr("class", "t-sub").attr("x", 4).attr("y", top + 52 + 7 * (chipH + chipGap) + 14);
+    wrapText(yr, "The CPI is DMK's former ally, now contesting Dharapuram itself. The CPI(M) is contesting Madurantakam. DMK's smaller April allies are not shown.", w - 8, 14);
+  }
+
+  // ======================= Block: DMK's math =======================
+  function blockDmk() {
+    const fig = makeFig("fig-dmk");
+    const svg = fig.svg;
+    const gHead = svg.append("g");
+    const gLegend = svg.append("g").attr("class", "layer");
+    const gUnits = svg.append("g").attr("class", "layer");
+    const gAllies = svg.append("g").attr("class", "layer");
+    const gWin = svg.append("g").attr("class", "layer");
+    const A = 80248, D = 63336, T = 46099, XMAX = 34149;
+    const ROWS = [
+      { g: 0, title: "DMK holds its April vote", detail: "Wins only if about 17,000 follow her" },
+      { g: 3000, title: "DMK finds 3,000 more votes", detail: "Wins if 14,000 to 20,000 follow her" },
+      { g: 6000, title: "DMK finds 6,000 more votes (about 35%)", detail: "Wins if 11,000 to 23,000 follow her" }
+    ];
+    const RANKFILL = function (b) { return b[6] <= 1 ? PC.d : b[6] === 2 ? "var(--dmk-2)" : "var(--others)"; };
+    const rc = d3.rollup(BOOTHS, function (v) { return v.length; }, function (b) { return b[6] <= 1 ? 1 : b[6]; });
+    let lastAllies = null;
+
+    function render(scene, animate) {
+      fig.measure();
+      const w = fig.w, h = fig.h, dur = animate ? DUR : 0;
+      let head;
+      if (scene === "rank") head = figHeader(gHead, w, "Where DMK finished in each booth", "Each square is one polling booth, in booth-number order");
+      else if (scene === "allies") head = figHeader(gHead, w, "DMK's April allies, now", "Where the parties that backed DMK in April stand for 6 October");
+      else head = figHeader(gHead, w, "When does DMK win?", "Depends on how many of Sathyabama's April voters follow her to TVK");
+
+      // rank units
+      show(gLegend, scene === "rank", dur); show(gUnits, scene === "rank", dur);
+      if (scene === "rank") {
+        legendRow(gLegend, [
+          { color: PC.d, label: "First " + (rc.get(1) || 0) },
+          { color: "var(--dmk-2)", label: "Second " + (rc.get(2) || 0) },
+          { color: "var(--others)", label: "Third " + (rc.get(3) || 0) }
+        ], 4, head + 12, w - 8);
+        const s = unitSize(w, h, head + 32, 10);
+        drawUnits(gUnits, gridPositions(w, head + 32, s).pos, s, RANKFILL, function () { return 1; }, 0);
+      }
+
+      // allies
+      show(gAllies, scene === "allies", dur);
+      if (scene === "allies") {
+        const st = lastAllies === "allies" ? "oct" : "move";
+        drawAllies(gAllies, w, head + 6, h, animate ? st : "oct", dur);
+      }
+      lastAllies = scene;
+
+      // window tracks
+      const isWin = scene === "window1" || scene === "window3";
+      show(gWin, isWin, dur);
+      if (isWin) {
+        gWin.selectAll("*").remove();
+        const top = head + 18, bottom = narrow() ? 60 : 120;
+        const rowH = Math.min(96, (h - top - bottom) / 3);
+        const trackH = Math.min(30, rowH * 0.36);
+        const x = d3.scaleLinear([0, XMAX], [4, w - 4]);
+        ROWS.forEach(function (r, i) {
+          const visible = scene === "window3" || i === 0;
+          const g = gWin.append("g").style("opacity", visible ? 1 : 0);
+          if (dur && visible && i > 0) g.style("opacity", 0).transition().delay(i * 160).duration(dur).style("opacity", 1);
+          const y = top + i * rowH;
+          g.append("text").attr("x", 4).attr("y", y + 12).attr("class", "t-strong").text(r.title);
+          g.append("text").attr("x", 4).attr("y", y + 27).attr("class", "t-sub").text(r.detail);
+          const ty = y + 36;
+          const lo = Math.max(0, A - D - r.g), hi = Math.min(XMAX, D + r.g - T);
+          const clipId = "clip-dmk-" + i;
+          g.append("clipPath").attr("id", clipId).append("rect").attr("x", x(0)).attr("y", ty).attr("width", x(XMAX) - x(0)).attr("height", trackH).attr("rx", trackH / 2);
+          const zones = g.append("g").attr("clip-path", "url(#" + clipId + ")");
+          zones.append("rect").attr("x", x(0)).attr("y", ty).attr("width", x(lo) - x(0) - 1).attr("height", trackH).style("fill", "color-mix(in srgb, var(--aiadmk) 38%, var(--bg))");
+          zones.append("rect").attr("x", x(hi) + 1).attr("y", ty).attr("width", x(XMAX) - x(hi) - 1).attr("height", trackH).style("fill", "color-mix(in srgb, var(--tvk) 42%, var(--bg))");
+          zones.append("rect").attr("x", x(lo)).attr("y", ty).attr("width", Math.max(2.5, x(hi) - x(lo))).attr("height", trackH).style("fill", PC.d);
+          if (i === 0) {
+            g.append("text").attr("x", x(0) + 10).attr("y", ty + trackH / 2 + 4).attr("class", "t-strong").text(w < 420 ? "AIADMK" : "AIADMK keeps the seat");
+            g.append("text").attr("x", x(XMAX) - 10).attr("y", ty + trackH / 2 + 4).attr("text-anchor", "end").attr("class", "t-strong").text("TVK wins");
+            g.append("line").attr("x1", x((lo + hi) / 2)).attr("x2", x((lo + hi) / 2)).attr("y1", ty + trackH + 2).attr("y2", ty + trackH + 12).style("stroke", "var(--ink-2)");
+            g.append("text").attr("x", x((lo + hi) / 2)).attr("y", ty + trackH + 24).attr("text-anchor", "middle").attr("class", "t-sub").text("a 325-vote window");
+          } else if (x(hi) - x(lo) > 70) {
+            g.append("text").attr("x", x((lo + hi) / 2)).attr("y", ty + trackH / 2 + 4).attr("text-anchor", "middle").attr("class", "t-on").text("DMK wins");
+          }
+        });
+        const ay = top + 3 * rowH + 8;
+        const ticks = w < 420 ? [0, 10000, 20000, 30000] : [0, 5000, 10000, 15000, 20000, 25000, 30000];
+        ticks.forEach(function (t) {
+          gWin.append("text").attr("x", x(t)).attr("y", ay).attr("text-anchor", t === 0 ? "start" : "middle").attr("class", "t-sub").text(t ? fmt(t) : "0");
+        });
+        gWin.append("text").attr("x", w / 2).attr("y", ay + 18).attr("text-anchor", "middle").attr("class", "t-sub").text("Sathyabama's April voters who follow her to TVK");
+        if (!narrow()) {
+          const fn = gWin.append("text").attr("x", 4).attr("y", ay + 42).attr("class", "t-sub");
+          wrapText(fn, "This is DMK's best case. It assumes DMK keeps all 63,336 of its April EVM votes, including the voters who came to it through Congress, VCK, IUML, MDMK and the Left, and that the only voters who change sides are Sathyabama's April voters who follow her to TVK.", w - 8, 14);
+        }
+      }
+      fig.scene = scene;
+    }
+    return { fig: fig, render: render, initial: "rank" };
+  }
+
+  // ======================= Block: TVK's path =======================
+  function blockTvk() {
+    const fig = makeFig("fig-tvk");
+    const svg = fig.svg;
+    const gHead = svg.append("g");
+    const gLine = svg.append("g").attr("class", "layer");
+    const gRoutes = svg.append("g").attr("class", "layer");
+    const gAllies = svg.append("g").attr("class", "layer");
+    const A = 80248, D = 63336, T = 46099, XMAX = 34149, CROSS = 17237;
+    let linesDrawn = false;
+
+    function render(scene, animate) {
+      fig.measure();
+      const w = fig.w, h = fig.h, dur = animate ? DUR : 0;
+      const isLine = ["dots", "lines", "cross", "question"].indexOf(scene) >= 0;
+      let head;
+      if (scene === "dots") head = figHeader(gHead, w, "April votes", "EVM votes for the three main parties");
+      else if (isLine) head = figHeader(gHead, w, "If Sathyabama's voters follow her", "Votes for each party as her April voters switch to TVK; everyone else votes as in April");
+      else if (scene === "routes") head = figHeader(gHead, w, "Two routes to first place", "Voters TVK must win over, if all of them come from one party");
+      else head = figHeader(gHead, w, "TVK's new allies", "Parties that backed DMK in April now back the TVK government");
+
+      show(gLine, isLine, dur);
+      if (isLine) {
+        gLine.selectAll("*").remove();
+        const annot = (scene === "cross" || scene === "question");
+        const m = { t: head + (annot ? 58 : 20), r: narrow() ? 96 : 108, b: 48, l: 46 };
+        const x = d3.scaleLinear([0, XMAX], [m.l, w - m.r]);
+        const y = d3.scaleLinear([40000, 85000], [h - m.b, m.t]);
+        [40000, 50000, 60000, 70000, 80000].forEach(function (v) {
+          gLine.append("line").attr("x1", m.l).attr("x2", w - m.r).attr("y1", y(v)).attr("y2", y(v)).style("stroke", "var(--rule)");
+          gLine.append("text").attr("x", m.l - 8).attr("y", y(v) + 4).attr("text-anchor", "end").attr("class", "t-sub").text(v / 1000 + "k");
+        });
+        (w < 420 ? [0, 10000, 20000, 30000] : [0, 5000, 10000, 15000, 20000, 25000, 30000]).forEach(function (t) {
+          gLine.append("text").attr("x", x(t)).attr("y", h - m.b + 18).attr("text-anchor", "middle").attr("class", "t-sub").text(t ? fmt(t) : "0");
+        });
+        gLine.append("text").attr("x", (m.l + w - m.r) / 2).attr("y", h - m.b + 36).attr("text-anchor", "middle").attr("class", "t-sub")
+          .text(scene === "dots" ? "" : "Sathyabama's April voters who follow her to TVK");
+        if (scene === "cross" || scene === "question") {
+          gLine.append("rect").attr("x", x(CROSS)).attr("y", m.t).attr("width", x(XMAX) - x(CROSS)).attr("height", h - m.b - m.t)
+            .style("fill", "color-mix(in srgb, var(--tvk) 16%, transparent)");
+          gLine.append("line").attr("x1", x(CROSS)).attr("x2", x(CROSS)).attr("y1", m.t - 8).attr("y2", h - m.b)
+            .style("stroke", "var(--ink-2)").style("stroke-dasharray", scene === "question" ? "4 4" : null);
+          const lx = Math.max(4, Math.min(x(CROSS) - 40, w - 230));
+          const lab = gLine.append("text").attr("x", lx).attr("y", m.t - 34).attr("class", scene === "question" ? "t-big" : "t-strong");
+          if (scene === "question") lab.attr("y", m.t - 14).attr("x", Math.max(4, x(CROSS) - 100)).text("How many follow her?");
+          else wrapText(lab, "Just over 17,000 follow her: TVK moves into first", w - 4 - lx, 14);
+        }
+        const SERIES = [
+          { k: "a", y0: A, y1: A - XMAX }, { k: "d", y0: D, y1: D }, { k: "t", y0: T, y1: T + XMAX }
+        ];
+        SERIES.forEach(function (s) {
+          const p = gLine.append("path").attr("d", "M" + x(0) + "," + y(s.y0) + "L" + x(XMAX) + "," + y(s.y1))
+            .style("fill", "none").style("stroke", PC[s.k]).style("stroke-width", 3).style("stroke-linecap", "round");
+          if (scene === "dots") p.style("opacity", 0);
+          else if (scene === "lines" && dur && !linesDrawn) {
+            const L = p.node().getTotalLength();
+            p.attr("stroke-dasharray", L + " " + L).attr("stroke-dashoffset", L).transition().duration(DUR * 1.6).attr("stroke-dashoffset", 0);
+            fig.busyUntil = performance.now() + DUR * 1.6 + 300;
+          }
+          gLine.append("circle").attr("cx", x(0)).attr("cy", y(s.y0)).attr("r", 6).style("fill", PC[s.k]).style("stroke", "var(--bg)").style("stroke-width", 2);
+          if (scene === "dots") {
+            gLine.append("text").attr("x", x(0) + 12).attr("y", y(s.y0) + 4).attr("class", "t-strong").text(PN[s.k] + " " + fmt(s.y0));
+          } else {
+            gLine.append("text").attr("x", x(XMAX) + 8).attr("y", y(s.y1) + 4).attr("class", "t-strong").text(PN[s.k] + " " + Math.round(s.y1 / 100) / 10 + "k");
+          }
+        });
+        linesDrawn = scene !== "dots";
+      } else {
+        linesDrawn = false;
+      }
+
+      show(gRoutes, scene === "routes", dur);
+      if (scene === "routes") {
+        gRoutes.selectAll("*").remove();
+        const top = head + 30, rowH = Math.min(96, (h - top - 40) / 2);
+        const x = d3.scaleLinear([0, 40000], [4, w - 4]);
+        [{ k: "a", title: "Through AIADMK's April voters", v: 17250, lab: "about 17,250" },
+         { k: "d", title: "Through DMK's April voters only", v: 34150, lab: "about 34,150, or 54% of DMK's vote" }].forEach(function (r, i) {
+          const y = top + i * rowH;
+          gRoutes.append("text").attr("x", 4).attr("y", y + 12).attr("class", "t-strong").text(r.title);
+          const bar = gRoutes.append("rect").attr("x", x(0)).attr("y", y + 22).attr("height", Math.min(30, rowH * 0.32)).attr("rx", 4).style("fill", PC[r.k])
+            .attr("width", dur ? 0 : x(r.v) - x(0));
+          if (dur) bar.transition().duration(dur).delay(i * 160).attr("width", x(r.v) - x(0));
+          const lt = gRoutes.append("text").attr("x", 4).attr("y", y + 22 + Math.min(30, rowH * 0.32) + 18).attr("class", "t-sub");
+          wrapText(lt, r.lab + " voters", w - 8, 14);
+        });
+        const fn = gRoutes.append("text").attr("x", 4).attr("y", top + 2 * rowH + 10).attr("class", "t-sub");
+        wrapText(fn, "Each AIADMK voter who switches is one vote less for the leader and one more for TVK. A DMK voter only takes from second place.", w - 8, 14);
+      }
+
+      show(gAllies, scene === "allies", dur);
+      if (scene === "allies") drawAllies(gAllies, w, head + 6, h, "oct", 0);
+      fig.scene = scene;
+    }
+    return { fig: fig, render: render, initial: "dots" };
+  }
+
+  // ---------- wire up scrollytelling ----------
+  const blocks = { april: blockApril(), battles: blockBattles(), dmk: blockDmk(), tvk: blockTvk() };
+  Object.keys(blocks).forEach(function (k) { blocks[k].render(blocks[k].initial, false); });
+
+  function observe() {
+    const margin = narrow() ? "-74% 0px -24% 0px" : "-48% 0px -50% 0px";
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        const step = e.target, sec = step.closest(".scrolly"), blk = blocks[sec.dataset.block];
+        sec.querySelectorAll(".step").forEach(function (s) { s.classList.toggle("is-active", s === step); });
+        if (blk.fig.scene !== step.dataset.scene || (blk.needsPlay && blk.needsPlay(step.dataset.scene))) blk.render(step.dataset.scene, true);
+      });
+    }, { rootMargin: margin, threshold: 0 });
+    document.querySelectorAll(".step").forEach(function (s) { io.observe(s); });
+    return io;
+  }
+  let io = observe();
+  // redraw for a new size or late fonts, but never in the middle of an animation
+  function redraw(b) {
+    const wait = b.fig.busyUntil - performance.now();
+    if (wait > 0) { clearTimeout(b.pending); b.pending = setTimeout(function () { redraw(b); }, wait + 50); return; }
+    b.render(b.fig.scene || b.initial, false);
+  }
+  function redrawAll() { Object.keys(blocks).forEach(function (k) { redraw(blocks[k]); }); }
+  let lastNarrow = narrow(), lastW = window.innerWidth, rt = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () {
+      if (window.innerWidth === lastW) return;      // phones resize on scroll as the address bar hides; ignore that
+      lastW = window.innerWidth;
+      redrawAll();
+      if (narrow() !== lastNarrow) { lastNarrow = narrow(); io.disconnect(); io = observe(); }
+    }, 150);
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(redrawAll);
+})();
+</script>
+
+</body>
+</html>
